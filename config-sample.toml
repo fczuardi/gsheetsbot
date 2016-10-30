@@ -1,0 +1,32 @@
+[oauth]
+clientId = ""
+clientSecret = ""
+redirectUrl = "urn:ietf:wg:oauth:2.0:oob"
+scopes = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.readonly"
+]
+
+[telegram]
+token = ""
+username = ""
+admins = ["fczuardi"]
+
+[sheet]
+# the share url of a google sheet
+url = ""
+
+# columns to be used as questions and get user input
+# after the input range, 3 adjacent columns
+# will be filled with metadata: timestamp, userId, tgFrom
+# so a range like A1:G1 will write on columns A to J
+inputRange = "Sheet1!A1:G1"
+
+# read only cells that can be read with a command
+# you need to specify the column where to find that cell
+# and the column of userIds to find the row of the
+# telegram user issuing the command
+[[sheet.readonlyCells]]
+column = "Sheet1!H1"
+userIdColumn = "Sheet1!H1"
+command = "/status"
