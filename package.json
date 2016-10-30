@@ -1,0 +1,25 @@
+{
+  "name": "gsheetsbot",
+  "version": "0.1.0",
+  "description": "A Telegram bot with a Google Sheets backend",
+  "main": "bot.js",
+  "repository": {
+    "url": "git@github.com:fczuardi/gsheetsbot.git",
+    "type": "git"
+  },
+  "author": "Fabricio C Zuardi <fabricio@fabricio.org>",
+  "license": "MIT",
+  "dependencies": {
+    "google-auth-library": "^0.9.9",
+    "googleapis": "^14.1.0",
+    "telegraf": "^3.3.0",
+    "toml-require": "^1.1.0"
+  },
+  "eslintConfig": {
+    "extends": "mnmo"
+  },
+  "devDependencies": {
+    "eslint": "^3.9.0",
+    "eslint-config-mnmo": "^1.0.0"
+  }
+}
