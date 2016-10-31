@@ -625,8 +625,8 @@ eslint-config-airbnb@^9.0.1:
     eslint-config-airbnb-base "^3.0.0"
 
 eslint-config-mnmo:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-mnmo/-/eslint-config-mnmo-1.0.0.tgz#9c16b335fde628b2de396db1bf24dd67e4be9f1a"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-mnmo/-/eslint-config-mnmo-2.0.2.tgz#234414f0bfb665e3bf4f16c549d61511bb8596b3"
   dependencies:
     babel-eslint "^6.0.4"
     eslint "^2.10.2"

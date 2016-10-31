@@ -21,17 +21,11 @@
     "toml-require": "^1.1.0"
   },
   "eslintConfig": {
-    "extends": "mnmo",
-    "rules": {
-      "comma-style": [
-        "error",
-        "first"
-      ]
-    }
+    "extends": "mnmo"
   },
   "devDependencies": {
     "eslint": "^3.9.0",
-    "eslint-config-mnmo": "^1.0.0",
+    "eslint-config-mnmo": "^2.0.2",
     "pm2": "^2.0.19"
   }
 }
