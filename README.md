@@ -11,6 +11,7 @@ Work in progress
   - [ ] append user answers to the configured sheet
 - [ ] /status command for pending-approval users
   - just reads from a sheet column
+- [ ] setup CI
 
 Contributing
 ------------
