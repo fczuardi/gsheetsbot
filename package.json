@@ -12,13 +12,16 @@
   "scripts": {
     "dev:bot": "pm2 start src/bot.js --name bot --watch",
     "logs": "pm2 logs",
+    "stop:bot": "pm2 stop bot",
+    "restart:bot": "pm2 restart bot",
     "start": "node src/bot.js"
   },
   "dependencies": {
     "google-auth-library": "^0.9.9",
     "googleapis": "^14.1.0",
     "telegraf": "^3.3.0",
-    "toml-require": "^1.1.0"
+    "toml-require": "^1.1.0",
+    "xtend": "^4.0.1"
   },
   "eslintConfig": {
     "extends": "mnmo"

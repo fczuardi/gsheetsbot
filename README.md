@@ -44,6 +44,15 @@ yarn dev:bot
 yarn logs
 ```
 
+### Stop bot
+```shell
+yarn stop:bot
+```
+
+### Restart bot (to reload config)
+```shell
+yarn restart:bot
+```
 
 Dependencies
 ------------
