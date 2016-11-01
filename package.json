@@ -10,13 +10,17 @@
   "author": "Fabricio C Zuardi <fabricio@fabricio.org>",
   "license": "MIT",
   "scripts": {
+    "dev:api": "pm2 start src/api.js --name api --watch",
     "dev:bot": "pm2 start src/bot.js --name bot --watch",
     "logs": "pm2 logs",
+    "stop:api": "pm2 stop api",
+    "restart:api": "pm2 restart api",
     "stop:bot": "pm2 stop bot",
     "restart:bot": "pm2 restart bot",
     "start": "node src/bot.js"
   },
   "dependencies": {
+    "express": "^4.14.0",
     "google-auth-library": "^0.9.9",
     "googleapis": "^14.1.0",
     "telegraf": "^3.3.0",
