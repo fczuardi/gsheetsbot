@@ -1,5 +1,5 @@
 const replies = {
-    admin: {
+    token: {
         unauthorized: 'Você não está na lista de admnistradores.'
     }
 };

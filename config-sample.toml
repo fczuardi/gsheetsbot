@@ -4,7 +4,13 @@ port = 58337
 [oauth]
 clientId = ""
 clientSecret = ""
-redirectUrl = "urn:ietf:wg:oauth:2.0:oob"
+
+# ex: http://example.com/oauthcallback
+redirectUrl = ""
+
+# send a /token command to your bot and open the link
+# to start the flow that gives you the refreshToken value
+refreshToken = ""
 scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.readonly"

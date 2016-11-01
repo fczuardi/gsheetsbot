@@ -1,11 +1,11 @@
 const start = require('./start');
-const admin = require('./admin');
+const token = require('./token');
 const help = require('./help');
 const settings = require('./settings');
 
 const commands =
     { start
-    , admin
+    , token
     , help
     , settings
     };
