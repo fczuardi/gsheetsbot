@@ -4,7 +4,6 @@ const config = require('../../config.toml');
 const oauth2Client = require('../oauth');
 
 const setupState = (ctx, next) => {
-    console.log('config middleware', ctx);
     const { message } = ctx.update;
     const admins = config.telegram.admins || [];
     if (!message) {
