@@ -1,5 +1,9 @@
+const replies = require('../replies');
 const admin = ctx => {
-    ctx.reply(`admins ${ctx.state.isAdmin}`);
+    if (!ctx.state.isAdmin) {
+        return ctx.reply(replies.admin.unauthorized);
+    }
+    return ctx.reply(`admins ${ctx.state.isAdmin}`);
 };
 
 module.exports = admin;
