@@ -30,11 +30,14 @@
   "eslintConfig": {
     "extends": "mnmo",
     "rules": {
-      "array-bracket-spacing": ["error", "always"]
+      "array-bracket-spacing": [
+        "error",
+        "always"
+      ]
     }
   },
   "devDependencies": {
-    "eslint": "^3.9.0",
+    "eslint": "^3.9.1",
     "eslint-config-mnmo": "^2.0.2",
     "pm2": "^2.0.19"
   }
