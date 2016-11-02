@@ -11,8 +11,9 @@ oauth2Client.setCredentials(
 );
 
 const gsheets = google.sheets('v4');
-const pattern = new RegExp('.*/d/([^/]*).*');
-const spreadsheetId = config.sheet.url.replace(pattern, '$1');
+const pattern = new RegExp('/spreadsheets/d/([a-zA-Z0-9-_]+)');
+const spreadsheetId = config.sheet.url.match(pattern)[1];
+console.log(spreadsheetId);
 
 console.log('spreadsheetId', spreadsheetId);
 
