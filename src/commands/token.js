@@ -6,5 +6,5 @@ const token = ctx => {
     return ctx.reply(`admins ${ctx.state.loginUrl}`);
 };
 
-module.exports = [token];
+module.exports = [ token ];
 

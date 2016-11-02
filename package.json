@@ -28,7 +28,10 @@
     "xtend": "^4.0.1"
   },
   "eslintConfig": {
-    "extends": "mnmo"
+    "extends": "mnmo",
+    "rules": {
+      "array-bracket-spacing": ["error", "always"]
+    }
   },
   "devDependencies": {
     "eslint": "^3.9.0",
