@@ -1,4 +1,5 @@
 const loadSheetDataMiddleware = require('../middlewares/load');
+const sheetUser = require('../middlewares/sheetUser');
 const replies = require('../replies');
 
 const welcome = (ctx, next) =>
@@ -18,6 +19,7 @@ const start = ctx => {
 const command =
     [ welcome
     , loadSheetDataMiddleware
+    , sheetUser
     , start
     ];
 
