@@ -1,3 +1,3 @@
-module.exports = ctx =>
-    ctx.reply('settings');
+const settings = ctx => ctx.reply('settings');
+module.exports = [settings];
 

@@ -10,5 +10,11 @@ const oauth2Client = new OAuth2(
   config.oauth.redirectUrl
 );
 
+oauth2Client.setCredentials(
+    { refresh_token: config.oauth.refreshToken
+    , expiry_date: true
+    }
+);
+
 module.exports = oauth2Client;
 

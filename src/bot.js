@@ -10,7 +10,8 @@ const bot = new Telegraf(config.telegram.token);
 bot.use(debugMiddleware);
 bot.use(configMiddleware);
 bot.use(userMiddleware);
-Object.keys(commands).forEach(commandName => {
-    bot.command(commandName, commands[commandName]);
+Object.keys(commands).forEach(name => {
+    bot.command(name, ...commands[name]);
 });
 bot.startPolling();
+

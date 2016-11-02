@@ -1,3 +1,3 @@
-module.exports = ctx =>
-    ctx.reply('help');
+const help = ctx => ctx.reply('help');
+module.exports = [help];
 
