@@ -25,17 +25,20 @@ admins = ["fczuardi"]
 # the share url of a google sheet
 url = ""
 
-# columns to be used as questions and get user input
-# after the input range, 3 adjacent columns
-# will be filled with metadata: timestamp, userId, tgFrom
-# so a range like A1:G1 will write on columns A to J
-inputRange = "Sheet1!A1:G1"
+# Columns to be used as questions and get user input,
+# the range should include 3 extra adjacent columns
+# to be filled with metadata: timestamp, userId, tgFrom.
+#
+# Example: if your form questions goes from A1 to H1 on the
+# spreadsheet you need to add 3 columns after that and
+# setup the dataRange to be A1:K
+dataRange = "Sheet1!A1:K"
 
-# read only cells that can be read with a command
-# you need to specify the column where to find that cell
-# and the column of userIds to find the row of the
-# telegram user issuing the command
-[[sheet.readonlyCells]]
-column = "Sheet1!H1"
-userIdColumn = "Sheet1!H1"
-command = "/status"
+# Which column to look for the approved state.
+# Example: if the status column is A, the value is 1
+# if the status column is H, the value is 8
+userStatusColumn = 8
+
+# The value in the status column to consider an user approved
+userApprovedValue = "Approved"
+

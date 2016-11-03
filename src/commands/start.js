@@ -4,23 +4,28 @@ const replies = require('../replies');
 
 const welcome = (ctx, next) =>
     ctx.reply(replies.start.welcome(ctx.state.displayName))
-    .then(next);
+    .then(next)
+    .catch(err => console.error(err));
 
-const start = ctx => {
-    if (!ctx.state.hasApplied) {
+const start = (ctx, next) => {
+    console.log('start command', ctx.state.userHasApplied);
+    if (!ctx.state.userHasApplied) {
         return ctx.reply(replies.start.signup);
     }
-    if (!ctx.state.isApproved) {
-        return ctx.reply('your status is:', ctx.state.userStatus);
+    if (!ctx.state.userIsApproved) {
+        return ctx.reply(`TBD (status): ${ctx.state.userStatus}`);
     }
-    return null;
+    return next();
 };
+
+const menu = ctx => ctx.reply('TBD (menu)');
 
 const command =
     [ welcome
     , loadSheetDataMiddleware
     , sheetUser
     , start
+    , menu
     ];
 
 module.exports = command;
