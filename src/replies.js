@@ -3,7 +3,7 @@ const start =
     , signup: 'Gostaria de se inscrever no programa?'
     };
 const token =
-    { unauthorized: 'Você não está na lista de admnistradores.'
+    { unauthorized: 'Você não está na lista de administradores.'
     };
 const replies =
     { start
