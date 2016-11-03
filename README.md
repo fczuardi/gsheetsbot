@@ -63,14 +63,12 @@ Telegram Bot API.
 The configuration file is writem in [TOML][toml], and we use 
 [toml-require][toml-require] for parsing it on node.js
 
-To interact with Google APIs we use [googleapis][googleapis] and 
-[google-auth-library][google-auth-library].
+To interact with Google APIs we use [googleapis][googleapis].
 
 [telegraf]: http://telegraf.js.org/
 [toml]: https://github.com/toml-lang/toml
 [toml-require]: https://www.npmjs.com/package/toml-require
 [googleapis]: https://github.com/google/google-api-nodejs-client
-[google-auth-library]: https://github.com/google/google-auth-library-nodejs
 
 Dev Dependencies
 ----------------

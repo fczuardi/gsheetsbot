@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "express": "^4.14.0",
-    "google-auth-library": "^0.9.9",
     "googleapis": "^14.1.0",
     "telegraf": "^3.3.0",
     "telegraf-googlesheets": "^0.1.3",
