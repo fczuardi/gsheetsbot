@@ -1,6 +1,5 @@
 const extend = require('xtend');
-require('toml-require').install();
-const config = require('../../config.toml');
+const config = require('../config');
 const oauth2Client = require('../oauth');
 
 const setupState = (ctx, next) => {

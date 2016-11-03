@@ -2,8 +2,7 @@ const util = require('util');
 const url = require('url');
 const express = require('express');
 
-require('toml-require').install();
-const config = require('../config.toml');
+const config = require('./config');
 const oauth2Client = require('./oauth');
 
 const app = express();

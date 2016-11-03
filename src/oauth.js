@@ -1,7 +1,6 @@
 const google = require('googleapis');
 
-require('toml-require').install();
-const config = require('../config.toml');
+const config = require('./config');
 
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(

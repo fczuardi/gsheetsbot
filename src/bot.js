@@ -1,6 +1,5 @@
 const Telegraf = require('telegraf');
-require('toml-require').install();
-const config = require('../config.toml');
+const config = require('./config');
 const debugMiddleware = require('./middlewares/debug');
 const configMiddleware = require('./middlewares/config');
 const userMiddleware = require('./middlewares/user');
