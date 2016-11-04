@@ -46,9 +46,9 @@ get a bot api token.
 #### Google App for acessing Google Sheets
 Follow step 1 of https://developers.google.com/sheets/quickstart/nodejs
 
-### Launch a bot process that restarts on src file changes
+### Launch bot and api processes that restarts on src file changes
 ```shell
-yarn dev:bot
+yarn dev
 ```
 
 ### Display stream of logs
@@ -56,14 +56,9 @@ yarn dev:bot
 yarn logs
 ```
 
-### Stop bot
+### Stop all processes
 ```shell
-yarn stop:bot
-```
-
-### Restart bot (to reload config)
-```shell
-yarn restart:bot
+yarn stop
 ```
 
 Dependencies

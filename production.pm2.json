@@ -1,0 +1,13 @@
+{
+    "apps": [
+        {
+            "name": "bot",
+            "script": "src/bot.js"
+        },
+        {
+            "name": "api",
+            "script": "src/api.js"
+        }
+    ]
+}
+

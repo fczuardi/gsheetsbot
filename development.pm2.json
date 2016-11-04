@@ -1,0 +1,19 @@
+{
+    "apps": [
+        {
+            "name": "bot",
+            "script": "src/bot.js",
+            "watch": true,
+            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "logs" ],
+            "watch_options": { "usePolling": true }
+        },
+        {
+            "name": "api",
+            "script": "src/api.js",
+            "watch": true,
+            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "logs" ],
+            "watch_options": { "usePolling": true }
+        }
+    ]
+}
+

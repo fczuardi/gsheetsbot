@@ -10,15 +10,15 @@
   "author": "Fabricio C Zuardi <fabricio@fabricio.org>",
   "license": "MIT",
   "scripts": {
-    "dev:api": "pm2 start src/api.js --name api --watch",
-    "dev:bot": "pm2 start src/bot.js --name bot --watch",
+    "dev": "pm2 start development.pm2.json",
+    "start": "pm2 start production.pm2.json",
+    "stop": "pm2 kill",
     "logs": "pm2 logs",
     "monit": "pm2 monit",
     "stop:api": "pm2 stop api",
-    "restart:api": "pm2 restart api",
     "stop:bot": "pm2 stop bot",
-    "restart:bot": "pm2 restart bot",
-    "start": "node src/bot.js"
+    "restart:api": "pm2 restart api",
+    "restart:bot": "pm2 restart bot"
   },
   "dependencies": {
     "express": "^4.14.0",
@@ -34,6 +34,6 @@
   "devDependencies": {
     "eslint": "^3.9.1",
     "eslint-config-mnmo": "^3.0.0",
-    "pm2": "^2.0.19"
+    "pm2": "next"
   }
 }
