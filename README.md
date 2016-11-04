@@ -2,15 +2,27 @@ Work in progress
 ----------------
 
 - [x] launch bot based on botfather credentials
-- [ ] launch express app to listen http requests such as oauth redirect
-- [ ] admin command to give bot Google Sheets permissions
-- [ ] store admin users tokens on filesystem
-- [ ] /start command for new users
-  - [ ] tos acceptance flow
-  - [ ] form questions for user signup
-  - [ ] append user answers to the configured sheet
+- [x] launch express app to listen http requests such as oauth redirect
+- [x] admin command to give bot Google Sheets permissions
+- [ ] log all telegram updates on a log file
 - [ ] /status command for pending-approval users
   - just reads from a sheet column
+- [ ] /signup command for new users
+  - [ ] read questions and review button namesfrom one sheetName
+  - [ ] answers review step
+  - [ ] write answers on a different sheetName
+- [ ] /start command for new users
+  - [ ] tos acceptance flow
+- [ ] help command
+- [ ] google drive middleware
+- [ ] gdrive folder navigation
+- [ ] gdrive use a README.md in the folder root as an intro message
+
+
+Other notes / tasks / whishlist
+-------------------------------
+- [ ] give user typing feedback when loading data
+- [ ] form validation
 - [ ] setup CI
 
 Contributing
