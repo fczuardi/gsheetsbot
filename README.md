@@ -4,7 +4,7 @@ Work in progress
 - [x] launch bot based on botfather credentials
 - [x] launch express app to listen http requests such as oauth redirect
 - [x] admin command to give bot Google Sheets permissions
-- [ ] log all telegram updates on a log file
+- [x] log all telegram updates on a log file
 - [ ] /status command for pending-approval users
   - just reads from a sheet column
 - [ ] /signup command for new users
