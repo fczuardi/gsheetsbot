@@ -4,14 +4,14 @@
             "name": "bot",
             "script": "src/bot.js",
             "watch": true,
-            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "logs" ],
+            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "*.log" ],
             "watch_options": { "usePolling": true }
         },
         {
             "name": "api",
             "script": "src/api.js",
             "watch": true,
-            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "logs" ],
+            "ignore_watch": [ ".git*", "*.md", "*.pm2.json", "*.log" ],
             "watch_options": { "usePolling": true }
         }
     ]

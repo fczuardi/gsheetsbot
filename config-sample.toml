@@ -1,6 +1,14 @@
 [api]
 port = 58337
 
+# winston File transport options
+# see https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport
+[log]
+filename = "telegram-updates.log"
+prettyPrint = false
+timestamp = true
+json = false
+
 [oauth]
 clientId = ""
 clientSecret = ""
