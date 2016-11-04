@@ -2293,8 +2293,8 @@ tar@~2.2.1:
     inherits "2"
 
 telegraf-googlesheets:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.2.0.tgz#115b84423b1b5ecca193952c3b6ace82922fe448"
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.3.0.tgz#e4740c54aae82c348a571ab6a5371abc8776279c"
   dependencies:
     googleapis "^14.1.0"
     xtend "^4.0.1"

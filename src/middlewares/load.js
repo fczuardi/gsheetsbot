@@ -9,7 +9,7 @@ const params =
     , spreadsheetId
     , range: config.sheet.dataRange
     };
-const loadSheet = tgs(params);
+const loadSheet = tgs.createMiddleware(params);
 
 module.exports = loadSheet;
 

@@ -1,15 +1,14 @@
 const extend = require('xtend');
+const tgs = require('telegraf-googlesheets');
 const config = require('../config');
 
-// this middleware adds 3 propertiesinto the state:
+// this middleware adds 3 properties into the state:
 // userHasApplied, userStatus and userIsApproved
 // based on the sheet property values
 const sheetUser = (ctx, next) => {
-    console.log('sheetUser middleware');
     const userId = `${ctx.from.id}`;
-    console.log('ctx.state', ctx.state);
-    const sheetData = ctx.state.sheets[config.sheet.dataRange.split('!')[0]];
-    console.log('sheetData', sheetData);
+    const sheetName = tgs.getSheetName(config.sheet.dataRange);
+    const sheetData = ctx.state.sheets[sheetName];
     const sheetBody = sheetData.slice(1);
     const userIdColumnIndex = sheetBody[0].length - 2;
     const userStatusColumnIndex = config.sheet.userStatusColumn - 1;

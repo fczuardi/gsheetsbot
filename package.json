@@ -24,7 +24,7 @@
     "express": "^4.14.0",
     "googleapis": "^14.1.0",
     "telegraf": "^3.3.0",
-    "telegraf-googlesheets": "^0.2.0",
+    "telegraf-googlesheets": "^0.3.0",
     "toml-require": "^1.1.0",
     "xtend": "^4.0.1"
   },
