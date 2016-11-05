@@ -19,7 +19,7 @@ const signup = (ctx, next) => {
     }
     ctx.session.awaitingInput = 'signup'; // eslint-disable-line 
     ctx.session.answers = userAnswers; // eslint-disable-line
-    ctx.reply(questions[userAnswers.length][2]);
+    ctx.replyWithMarkdown(questions[userAnswers.length][2]);
     return next();
 };
 
