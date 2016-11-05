@@ -5,8 +5,7 @@ Work in progress
 - [x] launch express app to listen http requests such as oauth redirect
 - [x] admin command to give bot Google Sheets permissions
 - [x] log all telegram updates on a log file
-- [ ] /status command for pending-approval users
-  - just reads from a sheet column
+- [x] /status command for pending-approval users
 - [ ] /signup command for new users
   - [ ] read questions and review button namesfrom one sheetName
   - [ ] answers review step
@@ -14,6 +13,8 @@ Work in progress
 - [ ] /start command for new users
   - [ ] tos acceptance flow
 - [ ] help command
+- [ ] /indicar command for approved users
+- [ ] /status command for approved users
 - [ ] google drive middleware
 - [ ] gdrive folder navigation
 - [ ] gdrive use a README.md in the folder root as an intro message
@@ -67,7 +68,7 @@ Dependencies
 This bot uses the [Telegraf][telegraf] library for interacting with the
 Telegram Bot API.
 
-The configuration file is writem in [TOML][toml], and we use 
+The configuration file is writem in [TOML][toml], and we use
 [toml-require][toml-require] for parsing it on node.js
 
 To interact with Google APIs we use [googleapis][googleapis].

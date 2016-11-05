@@ -29,24 +29,35 @@ token = ""
 username = ""
 admins = ["fczuardi"]
 
-[sheet]
+[sheets]
 # the share url of a google sheet
 url = ""
 
-# Columns to be used as questions and get user input,
-# the range should include 3 extra adjacent columns
-# to be filled with metadata: timestamp, userId, tgFrom.
-#
-# Example: if your form questions goes from A1 to H1 on the
-# spreadsheet you need to add 3 columns after that and
-# setup the dataRange to be A1:K
-dataRange = "Sheet1!A1:K"
+[sheets.user]
+# a table with 4 columns to use for the application for
+# first column is the variable, second is a short caption
+# third is an input question and optionally a 4th column
+# with multiple choice answer separated by the | character
+questions = "Questions User!A2:D"
 
-# Which column to look for the approved state.
-# Example: if the status column is A, the value is 1
-# if the status column is H, the value is 8
-userStatusColumn = 8
+# remember to leave 3 extra adjacent columns free
+# for telegram metadata and include those extra 3 columns in the range
+# example, if your form has 9 questions, from A to I, your
+# range needs to go from A to L
+answers = "Answers Users!A2:L2"
+
+# what range to look for user application status
+status = "'Users Statuses'!A2:C"
+
+# Which columns to look for the userId and approved state.
+# Example: if the status column is A, the value is 0
+# if the status column is H, the value is 7
+statusUserId = 0
+statusColumn = 1
 
 # The value in the status column to consider an user approved
-userApprovedValue = "Approved"
+approvedValue = "Approved"
+
+[sheets.school]
+questions = "Questions School!A2:D11"
 

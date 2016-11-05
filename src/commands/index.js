@@ -1,10 +1,12 @@
-const start = require('./start');
+// const start = require('./start');
+const status = require('./status');
 const token = require('./token');
 const help = require('./help');
 const settings = require('./settings');
 
 const commands =
-    { start
+    { status
+    // , start
     , token
     , help
     , settings

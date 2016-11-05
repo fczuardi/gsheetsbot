@@ -3,13 +3,16 @@ const oauth2Client = require('../oauth');
 const config = require('../config');
 
 const pattern = new RegExp('/spreadsheets/d/([a-zA-Z0-9-_]+)');
-const spreadsheetId = config.sheet.url.match(pattern)[1];
-const params =
-    { auth: oauth2Client
-    , spreadsheetId
-    , range: config.sheet.dataRange
-    };
-const loadSheet = tgs.createMiddleware(params);
+const spreadsheetId = config.sheets.url.match(pattern)[1];
+const createLoadSheetMiddleware = range => {
+    console.log('range', range);
+    const params =
+        { auth: oauth2Client
+        , spreadsheetId
+        , range
+        };
+    return tgs.createMiddleware(params);
+};
 
-module.exports = loadSheet;
+module.exports = createLoadSheetMiddleware;
 

@@ -1,12 +1,16 @@
 const start =
     { welcome: username => `Olá ${username}`
-    , signup: 'Gostaria de se inscrever no programa?'
     };
 const token =
     { unauthorized: 'Você não está na lista de administradores.'
     };
+const status =
+    { signup: 'Gostaria de se inscrever no programa?'
+    , approved: 'Parabéns sua inscrição foi aceita!'
+    };
 const replies =
-    { start
+    { status
+    , start
     , token
     };
 

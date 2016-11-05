@@ -1,5 +1,5 @@
 const loadSheetDataMiddleware = require('../middlewares/load');
-const sheetUser = require('../middlewares/sheetUser');
+const userStatus = require('../middlewares/userStatus');
 const replies = require('../replies');
 
 const welcome = (ctx, next) =>
@@ -23,7 +23,7 @@ const menu = ctx => ctx.reply('TBD (menu)');
 const command =
     [ welcome
     , loadSheetDataMiddleware
-    , sheetUser
+    , userStatus
     , start
     , menu
     ];
