@@ -11,7 +11,7 @@ const extend = require('xtend');
 const messageDataParser = (ctx, next) => {
     const { message } = ctx.update;
     if (!message) {
-        return false;
+        return next();
     }
     const { text, date } = message;
     const { first_name, last_name, username, id } = ctx.from;
