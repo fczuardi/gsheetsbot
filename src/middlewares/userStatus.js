@@ -8,7 +8,7 @@ const config = require('../config');
 const userStatusMiddleware = (ctx, next) => {
     const userId = `${ctx.from.id}`;
     const sheetName = tgs.getSheetName(config.sheets.user.status);
-    const sheetData = ctx.state.sheets[sheetName];
+    const sheetData = ctx.state.sheets[sheetName] || [];
     const userIdColumn = config.sheets.user.statusUserId;
     const userStatusColumn = config.sheets.user.statusColumn;
     const rowWithUserId = sheetData.find(
