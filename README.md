@@ -8,7 +8,7 @@ Work in progress
 - [x] /status command for pending-approval users
 - [ ] /signup command for new users
   - [x] read questions and review button namesfrom one sheetName
-  - [ ] choice to submit or review answers
+  - [x] choice to submit or review answers
   - [ ] submit: write answers on a different sheetName
   - [ ] review: inline buttons navigation to show answers content 
   and OK / Edit buttons

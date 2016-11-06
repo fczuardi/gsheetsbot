@@ -1,3 +1,4 @@
+/* eslint max-len: "off" */
 const start =
     { welcome: username => `Olá ${username}`
     };
@@ -8,9 +9,17 @@ const status =
     { signup: 'Gostaria de se inscrever no programa?'
     , approved: 'Parabéns sua inscrição foi aceita!'
     };
+const signup =
+    { formFinished: 'Formulário preenchido, quer enviar já ou revisar alguma resposta?'
+    , submitButton: 'Enviar'
+    , reviewButton: 'Revisar'
+    , submissionError: 'Ocorreu um erro, vamos tentar de novo.'
+    , submissionSent: 'Sua inscrição foi enviada! Entraremos em contato. Caso queira acompanhar o estado de sua aplicação, digite /status.'
+    };
 const replies =
     { status
     , start
+    , signup
     , token
     };
 
