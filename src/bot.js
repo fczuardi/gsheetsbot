@@ -5,6 +5,7 @@ const logMiddleware = require('telegraf-logfile');
 const adminMiddleware = require('./middlewares/admin');
 const userMiddleware = require('./middlewares/user');
 const commands = require('./commands');
+const actions = require('./actions');
 
 const bot = new Telegraf(config.telegram.token);
 // session in memory (ctx.session)
@@ -22,7 +23,12 @@ bot.use(userMiddleware);
 Object.keys(commands).forEach(name => {
     bot.command(name, ...commands[name]);
 });
-
+// setup all calback handlers
+Object.keys(actions).forEach(name => {
+    bot.action(name, Telegraf.compose(actions[name]));
+});
+// text input handler
+// used mostly to fill forms
 bot.on('text', (ctx, next) => {
     const { update, updateType } = ctx;
     if (updateType !== 'message') {
@@ -45,5 +51,7 @@ bot.on('text', (ctx, next) => {
     }
     return next();
 });
+// bot daemon start
+// TODO: replace polling with webhooks
 bot.startPolling();
 

@@ -674,9 +674,9 @@ eslint-config-airbnb@^9.0.1:
   dependencies:
     eslint-config-airbnb-base "^3.0.0"
 
-eslint-config-mnmo:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-mnmo/-/eslint-config-mnmo-3.0.0.tgz#e08cf54e3a9f4b485d439cc6c12dbe2345071ec4"
+eslint-config-mnmo@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-mnmo/-/eslint-config-mnmo-3.1.0.tgz#baa3f2a586cc449df09c00d33a8af95463d822ad"
   dependencies:
     babel-eslint "^6.0.4"
     eslint "^2.10.2"
@@ -1171,7 +1171,7 @@ gtoken@^1.1.0:
     mime "^1.2.11"
     request "^2.72.0"
 
-handlebars:
+handlebars@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.5.tgz#92c6ed6bb164110c50d4d8d0fbddc70806c6f8e7"
   dependencies:
@@ -1663,8 +1663,8 @@ mkdirp@^0.5.0, mkdirp@^0.5.1, "mkdirp@>=0.5 0", mkdirp@~0.5.1, mkdirp@0.5.1:
     minimist "0.0.8"
 
 moment-timezone@~0.5.5:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.7.tgz#1305bcada16f046dbbc7ac89abf66effff886cb5"
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.9.tgz#e0ea82036d67d21d793544a91b5057f480eda2dd"
   dependencies:
     moment ">= 2.6.0"
 
@@ -2060,8 +2060,8 @@ rechoir@^0.6.2:
     resolve "^1.1.6"
 
 regenerator-runtime@^0.9.5:
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.5.tgz#403d6d40a4bdff9c330dd9392dcbb2d9a8bba1fc"
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz#d33eb95d0d2001a4be39659707c51b0cb71ce029"
 
 regex-cache@^0.4.2:
   version "0.4.3"
@@ -2136,8 +2136,8 @@ request@~2.74.0:
     tunnel-agent "~0.4.1"
 
 require-uncached@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/require-uncached/-/require-uncached-1.0.2.tgz#67dad3b733089e77030124678a459589faf6a7ec"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/require-uncached/-/require-uncached-1.0.3.tgz#4e0d56d6c9662fd31e43011c4b95aa49955421d3"
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
@@ -2384,27 +2384,27 @@ tar@~2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
-telegraf-googlesheets:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.3.0.tgz#e4740c54aae82c348a571ab6a5371abc8776279c"
-  dependencies:
-    googleapis "^14.1.0"
-    xtend "^4.0.1"
-
-telegraf-logfile:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/telegraf-logfile/-/telegraf-logfile-0.2.0.tgz#f8b57cdee7383cdae0f20da157ac9e4bd59a73e4"
-  dependencies:
-    winston "^2.3.0"
-    xtend "^4.0.1"
-
-telegraf@^3.3.0:
+telegraf:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.3.0.tgz#0782611e6a5bac8b8ef04d9160ad6833b15e23c7"
   dependencies:
     debug "^2.2.0"
     node-fetch "^1.6.3"
     sandwich-stream "^1.0.0"
+
+telegraf-googlesheets:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.5.0.tgz#341fbc8a603878b897379b8e221acfa395890e81"
+  dependencies:
+    googleapis "^14.1.0"
+    xtend "^4.0.1"
+
+telegraf-logfile@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/telegraf-logfile/-/telegraf-logfile-0.2.0.tgz#f8b57cdee7383cdae0f20da157ac9e4bd59a73e4"
+  dependencies:
+    winston "^2.3.0"
+    xtend "^4.0.1"
 
 text-table@~0.2.0:
   version "0.2.0"

@@ -7,9 +7,11 @@ Work in progress
 - [x] log all telegram updates on a log file
 - [x] /status command for pending-approval users
 - [ ] /signup command for new users
-  - [ ] read questions and review button namesfrom one sheetName
-  - [ ] answers review step
-  - [ ] write answers on a different sheetName
+  - [x] read questions and review button namesfrom one sheetName
+  - [x] choice to submit or review answers
+  - [ ] submit: write answers on a different sheetName
+  - [ ] review: inline buttons navigation to show answers content 
+  and OK / Edit buttons
 - [ ] /start command for new users
   - [ ] tos acceptance flow
 - [ ] help command
