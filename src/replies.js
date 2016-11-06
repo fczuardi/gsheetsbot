@@ -11,9 +11,11 @@ const status =
     };
 const signup =
     { formFinished: 'Formulário preenchido, quer enviar já ou revisar alguma resposta?'
+    , retryFormFinished: 'Deseja tentar novamente?'
     , submitButton: 'Enviar'
     , reviewButton: 'Revisar'
-    , submissionError: 'Ocorreu um erro, vamos tentar de novo.'
+    , submissionError: 'Ocorreu um erro no envio.'
+    , emptyAnswersError: 'Perdi suas respostas, vamos tentar de novo.'
     , submissionSent: 'Sua inscrição foi enviada! Entraremos em contato. Caso queira acompanhar o estado de sua aplicação, digite /status.'
     };
 const replies =

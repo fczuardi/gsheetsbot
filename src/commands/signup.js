@@ -48,8 +48,11 @@ const signupEnd = (ctx, next) => {
         }
     ] ];
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard } };
+    const replyText = ctx.state.submitError
+        ? replies.signup.retryFormFinished
+        : replies.signup.formFinished;
     return ctx.reply(
-        replies.signup.formFinished, replyOptions
+        replyText, replyOptions
     ).then(next).catch(console.error);
 };
 
