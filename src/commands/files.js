@@ -1,46 +1,50 @@
-const { getFolder } = require('telegraf-googledrive');
+const tgd = require('telegraf-googledrive');
 const config = require('../config');
 const oauthClient = require('../oauth');
 
 const { rootId, fields } = config.drive;
 
-const useFiles = (ctx, next) => {
-    console.log('DEBUG: state ', ctx.state[rootId]);
+const makeKeyboard = (ctx, next) => {
     console.log('ctx.state: ', ctx.state.folders[rootId]);
-    ctx.reply(`Se liga: ${JSON.stringify(ctx.state.folders[rootId])}`);
 
     const folders = ctx.state.folders[rootId];
-    const buttons = [];
-
-    console.log('Vamos começar a putaria');
+    const inlineKeyboard = [];
     folders.forEach(file => {
-        console.log('file: ', file);
         // this file is an subfolder
         if (file.mimeType === 'application/vnd.google-apps.folder') {
-            buttons.push([ { text: file.name } ]);
-        // this file is a markdown, therefore the descrition
-        } else if (file.mineType === 'text/markdown') {
-            description = file; //eslint-disable-line
-        // this file is a regular file
+            inlineKeyboard.push([
+                { text: file.name
+                    , callback_data: `changeFolder,${file.id}`
+                }
+            ]);
         } else {
-            buttons.push([ { text: file.name } ]);
+            inlineKeyboard.push([
+                { text: file.name
+                    , callback_data: `sendFile,${file.id}`
+                }
+            ]);
         }
     });
 
-    console.log('Enviando resposta');
-    ctx.replyWithMarkdown('Descrição bonita aqui', { reply_markup: {
-        resize_keyboard: true
-        , one_time_keyboard: true
-        , keyboard: buttons
-    } });
+    inlineKeyboard.concat(ctx.state.defaultKeyboard || []);
 
-    return next();
+    const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
+        , disable_web_page_preview: true };
+    const replyText = ctx.state.folders.description || 'default decription';
+    return ctx.replyWithMarkdown(
+        replyText, replyOptions
+    ).then(next).catch(console.error);
 };
 
-const filesToState = getFolder({ rootId, fields, auth: oauthClient });
+const filesToState = tgd.getFolder({ rootId, fields, auth: oauthClient });
+
+/* Sets message description to ctx.state.folder.description from google drive README.md file
+ */
+const setDescription = tgd.setDescription({ path: config.path.tempFolder , auth: oauthClient}); //eslint-disable-line
 
 module.exports = [
     filesToState
-    , useFiles
+    , setDescription
+    , makeKeyboard
 ];
 
