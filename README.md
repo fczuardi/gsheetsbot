@@ -9,7 +9,7 @@ Work in progress
 - [ ] /signup command for new users
   - [x] read questions and review button namesfrom one sheetName
   - [x] choice to submit or review answers
-  - [ ] submit: write answers on a different sheetName
+  - [x] submit: write answers on a different sheetName
   - [ ] review: inline buttons navigation to show answers content 
   and OK / Edit buttons
 - [ ] /start command for new users

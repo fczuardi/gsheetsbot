@@ -10,7 +10,6 @@ const addUserStatus = require('../middlewares/userStatus');
 const loadQuestions = loadTable(config.sheets.user.questions);
 const loadUserStatus = loadTable(config.sheets.user.status);
 
-
 const sheetName = tgs.getSheetName(config.sheets.user.questions);
 const getQuestions = ctx => ctx.state.sheets[sheetName];
 const getAnswers = ctx => ctx.session.answers || [];

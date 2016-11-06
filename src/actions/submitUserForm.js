@@ -1,23 +1,41 @@
+const extend = require('xtend');
 const Telegraf = require('telegraf');
 const replies = require('../replies');
 const tgs = require('telegraf-googlesheets');
-// const oauth2Client = require('../oauth');
-// const config = require('../config');
+const auth = require('../oauth');
+const config = require('../config');
+const emptyAnswersReply = require('./emptyAnswersReply');
 const signup = require('../commands/signup');
 
-const submitUserForm = (ctx, next) => {
-    // console.log('---submitUserForm---', ctx.callbackQuery.id);
+const range = config.sheets.user.answers;
+const valueInputOption = 'USER_ENTERED';
+const insertDataOption = 'INSERT_ROWS';
+const majorDimension = 'ROWS';
+
+const spreadsheetId = tgs.getSheetId(config.sheets.url);
+const params =
+    { auth
+    , spreadsheetId
+    , range
+    , valueInputOption
+    , insertDataOption
+    };
+
+const writeFormRow = (ctx, next) => {
+    // console.log('---writeFormRow---', ctx.callbackQuery.id);
     const { answers } = ctx.session;
-    if (!answers) {
-        return ctx.editMessageText(
-            replies.signup.emptyAnswersError
-        ).then(next).catch(err => {
-            console.error(err);
-            return next();
-        });
-    }
+    const resource =
+        { majorDimension
+        , values: [
+            [ ...answers
+            , ctx.callbackQuery.message.date
+            , ctx.from.id
+            , JSON.stringify(ctx.from)
+            ] ]
+        , range
+        };
     return tgs.appendRow(
-        { foo: 'bar' }
+        extend(params, { resource })
     ).then(() => {
         ctx.state.submitError = false; // eslint-disable-line
         return ctx.editMessageText(
@@ -37,16 +55,19 @@ const callbackEnd = (ctx, next) => {
     return next();
 };
 
-const restartSignupIfNeeded = Telegraf.branch(
-    ctx => !ctx.session.answers || ctx.state.submitError,
-    Telegraf.compose(signup),
-    ctx => console.log('form submitted.', ctx.session, ctx.state)
+const submitUserForm = Telegraf.branch(
+    ctx => !ctx.session.answers,
+    Telegraf.compose(
+        [ emptyAnswersReply
+        , ...signup
+        ]
+    ),
+    writeFormRow
 );
 
 const action =
     [ submitUserForm
     , callbackEnd
-    , restartSignupIfNeeded
     ];
 
 module.exports = action;

@@ -2393,8 +2393,8 @@ telegraf:
     sandwich-stream "^1.0.0"
 
 telegraf-googlesheets:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.5.0.tgz#341fbc8a603878b897379b8e221acfa395890e81"
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/telegraf-googlesheets/-/telegraf-googlesheets-0.5.1.tgz#f3b0073e92151996a0182f9f01eaf820e239d7d9"
   dependencies:
     googleapis "^14.1.0"
     xtend "^4.0.1"
