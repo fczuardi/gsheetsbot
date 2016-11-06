@@ -4,6 +4,7 @@ const replies = require('../replies');
 const tgs = require('telegraf-googlesheets');
 const auth = require('../oauth');
 const config = require('../config');
+const emptyAnswersReply = require('./emptyAnswersReply');
 const signup = require('../commands/signup');
 
 const range = config.sheets.user.answers;
@@ -20,17 +21,9 @@ const params =
     , insertDataOption
     };
 
-const submitUserForm = (ctx, next) => {
-    // console.log('---submitUserForm---', ctx.callbackQuery.id);
+const writeFormRow = (ctx, next) => {
+    // console.log('---writeFormRow---', ctx.callbackQuery.id);
     const { answers } = ctx.session;
-    if (!answers) {
-        return ctx.editMessageText(
-            replies.signup.emptyAnswersError
-        ).then(next).catch(err => {
-            console.error(err);
-            return next();
-        });
-    }
     const resource =
         { majorDimension
         , values: [
@@ -62,16 +55,19 @@ const callbackEnd = (ctx, next) => {
     return next();
 };
 
-const restartSignupIfNeeded = Telegraf.branch(
-    ctx => !ctx.session.answers || ctx.state.submitError,
-    Telegraf.compose(signup),
-    ctx => console.log('form submitted.', ctx.session, ctx.state)
+const submitUserForm = Telegraf.branch(
+    ctx => !ctx.session.answers,
+    Telegraf.compose(
+        [ emptyAnswersReply
+        , ...signup
+        ]
+    ),
+    writeFormRow
 );
 
 const action =
     [ submitUserForm
     , callbackEnd
-    , restartSignupIfNeeded
     ];
 
 module.exports = action;
