@@ -31,10 +31,14 @@ const submitUserForm = (ctx, next) => {
             return next();
         });
     }
-    console.log('appendRow', params);
     const resource =
         { majorDimension
-        , values: [ answers ]
+        , values: [
+            [ ...answers
+            , ctx.callbackQuery.message.date
+            , ctx.from.id
+            , JSON.stringify(ctx.from)
+            ] ]
         , range
         };
     return tgs.appendRow(
