@@ -4,7 +4,6 @@ const config = require('../config');
 
 const spreadsheetId = tgs.getSheetId(config.sheets.url);
 const createLoadSheetMiddleware = range => {
-    console.log('range', range);
     const params =
         { auth: oauth2Client
         , spreadsheetId
