@@ -1,9 +1,24 @@
+const extend = require('xtend');
 const Telegraf = require('telegraf');
 const replies = require('../replies');
 const tgs = require('telegraf-googlesheets');
-// const oauth2Client = require('../oauth');
-// const config = require('../config');
+const auth = require('../oauth');
+const config = require('../config');
 const signup = require('../commands/signup');
+
+const range = config.sheets.user.answers;
+const valueInputOption = 'USER_ENTERED';
+const insertDataOption = 'INSERT_ROWS';
+const majorDimension = 'ROWS';
+
+const spreadsheetId = tgs.getSheetId(config.sheets.url);
+const params =
+    { auth
+    , spreadsheetId
+    , range
+    , valueInputOption
+    , insertDataOption
+    };
 
 const submitUserForm = (ctx, next) => {
     // console.log('---submitUserForm---', ctx.callbackQuery.id);
@@ -16,8 +31,14 @@ const submitUserForm = (ctx, next) => {
             return next();
         });
     }
+    console.log('appendRow', params);
+    const resource =
+        { majorDimension
+        , values: [ answers ]
+        , range
+        };
     return tgs.appendRow(
-        { foo: 'bar' }
+        extend(params, { resource })
     ).then(() => {
         ctx.state.submitError = false; // eslint-disable-line
         return ctx.editMessageText(
