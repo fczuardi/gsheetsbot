@@ -61,3 +61,22 @@ approvedValue = "Approved"
 [sheets.school]
 questions = "Questions School!A2:D11"
 
+# Google drive variables
+[drive]
+
+# This the root ID number that can be found on folder url.
+# ie:. https://drive.google.com/drive/some_path/{{rootId}}
+rootId = ""
+
+# path variable used inside program to save temp data.
+# don't forget to create this folder
+tempFolder = ""
+
+# Those are the parameters used when making the request to google drive's
+# API service
+[drive.fields]
+corpus = ""
+orderBy = ""
+pageSize = 1000
+fields = ""
+
