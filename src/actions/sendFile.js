@@ -1,12 +1,13 @@
 const tgd = require('telegraf-googledrive');
+const oauthClient = require('../oauth');
 const config = require('../config');
 const extend = require('xtend');
 
-const { rootId } = config;
+const { rootId, fields } = config.drive;
 
 const setCurrentFile = (ctx, next) => {
     console.log('setCurrentFile');
-    const fileId = ctx.callbackQuery.match[2];
+    const fileId = ctx.match[2];
     const file = ctx.state.folders[rootId].filter(f => f.id === fileId);
     console.log(fileId, file);
     const { mimeType } = file[0];
@@ -21,10 +22,12 @@ const setCurrentFile = (ctx, next) => {
     return next();
 };
 
-const sendFile = tgd.replyFile({ path: config.drive.tempFolder });
+const filesToState = tgd.getFolder({ rootId, fields, auth: oauthClient });
+const sendFile = tgd.replyFile({ path: config.drive.tempFolder, auth: oauthClient });
 
 
 module.exports = [
-    setCurrentFile
+    filesToState
+    , setCurrentFile
     , sendFile
 ];
