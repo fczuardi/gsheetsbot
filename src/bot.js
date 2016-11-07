@@ -25,7 +25,7 @@ Object.keys(commands).forEach(name => {
 });
 // setup all calback handlers
 Object.keys(actions).forEach(name => {
-    bot.action(name, Telegraf.compose(actions[name]));
+    bot.action(new RegExp(`(${name}) *(.*)`), Telegraf.compose(actions[name]));
 });
 // text input handler
 // used mostly to fill forms

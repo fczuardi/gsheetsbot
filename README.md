@@ -10,7 +10,7 @@ Work in progress
   - [x] read questions and review button namesfrom one sheetName
   - [x] choice to submit or review answers
   - [x] submit: write answers on a different sheetName
-  - [ ] review: inline buttons navigation to show answers content 
+  - [x] review: inline buttons navigation to show answers content 
   and OK / Edit buttons
 - [ ] /start command for new users
   - [ ] tos acceptance flow
@@ -24,7 +24,7 @@ Work in progress
 
 Other notes / tasks / whishlist
 -------------------------------
-- [ ] give user typing feedback when loading data
+- [x] give user typing feedback when loading data
 - [ ] form validation
 - [ ] setup CI
 
