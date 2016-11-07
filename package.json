@@ -25,6 +25,7 @@
     "googleapis": "^14.1.0",
     "handlebars": "^4.0.5",
     "telegraf": "^3.3.0",
+    "telegraf-googledrive": "^0.3.0",
     "telegraf-googlesheets": "^0.5.1",
     "telegraf-logfile": "^0.2.0",
     "toml-require": "^1.1.0",
