@@ -43,11 +43,15 @@ bot.on('text', (ctx, next) => {
         switch (awaitingInput) {
         case 'signup':
             ctx.session.answers.push(text);
+            return Telegraf.compose(commands[awaitingInput])(ctx, next);
+            break;
+        case 'editAnswer':
+            ctx.session.answers[ctx.session.answerToEdit] = text;
+            return Telegraf.compose(actions.reviewUserForm)(ctx, next);
             break;
         default:
             break;
         }
-        return Telegraf.compose(commands[awaitingInput])(ctx, next);
     }
     return next();
 });

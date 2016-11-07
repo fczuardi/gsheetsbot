@@ -39,11 +39,18 @@ const chooseAnswer = (ctx, next) => {
         { text: replies.signup.submitButton
         , callback_data: 'submitUserForm'
         } ];
-    return ctx.editMessageText(replyText,
-        { parse_mode: 'Markdown'
-        , reply_markup: { inline_keyboard: editAnswerButtons.concat([ submitRow ]) }
-        }
-    ).then(next).catch(console.error);
+    ctx.session.questions = questions; // eslint-disable-line
+    console.log('ctx.updateType', ctx.updateType);
+    if (ctx.updateType === 'callback_query') {
+        return ctx.editMessageText(replyText,
+            { parse_mode: 'Markdown'
+            , reply_markup: { inline_keyboard: editAnswerButtons.concat([ submitRow ]) }
+            }
+        ).then(next).catch(console.error);
+    }
+    return ctx.replyWithMarkdown(replyText, {
+        reply_markup: { inline_keyboard: editAnswerButtons.concat([ submitRow ]) }
+    }).then(next).catch(console.error);
 };
 
 const reviewUserForm = Telegraf.branch(
@@ -61,6 +68,9 @@ const reviewUserForm = Telegraf.branch(
 );
 
 const callbackEnd = (ctx, next) => {
+    if (ctx.updateType !== 'callback_query'){
+        return next();
+    }
     ctx.answerCallbackQuery().catch(err => console.error(err));
     return next();
 };
