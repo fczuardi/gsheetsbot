@@ -14,13 +14,13 @@ const makeKeyboard = (ctx, next) => {
         if (file.mimeType === 'application/vnd.google-apps.folder') {
             inlineKeyboard.push([
                 { text: file.name
-                    , callback_data: `changeFolder,${file.id}`
+                    , callback_data: `changeFolder ${file.id}`
                 }
             ]);
         } else {
             inlineKeyboard.push([
                 { text: file.name
-                    , callback_data: `sendFile,${file.id}`
+                    , callback_data: `sendFile ${file.id}`
                 }
             ]);
         }
