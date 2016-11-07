@@ -75,8 +75,8 @@ tempFolder = ""
 # Those are the parameters used when making the request to google drive's
 # API service
 [drive.fields]
-corpus = ""
-orderBy = ""
+corpus = "user"
+orderBy = "folder"
 pageSize = 1000
-fields = ""
+fields = "files(fileExtension,fullFileExtension,id,kind,mimeType,name,originalFilename,ownedByMe,parents,trashed),kind,nextPageToken"
 
