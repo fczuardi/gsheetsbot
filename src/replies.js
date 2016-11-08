@@ -18,11 +18,15 @@ const signup =
     , emptyAnswersError: 'Perdi suas respostas, vamos tentar de novo.'
     , submissionSent: 'Sua inscrição foi enviada! Entraremos em contato. Caso queira acompanhar o estado de sua aplicação, digite /status.'
     };
+const docs =
+    { defaultDescription: 'Escolha uma opção:'
+    };
 const replies =
     { status
     , start
     , signup
     , token
+    , docs
     };
 
 module.exports = replies;

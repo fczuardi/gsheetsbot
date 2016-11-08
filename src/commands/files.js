@@ -1,4 +1,5 @@
 const tgd = require('telegraf-googledrive');
+const replies = require('../replies');
 const config = require('../config');
 const oauthClient = require('../oauth');
 
@@ -33,7 +34,7 @@ const makeKeyboard = (ctx, next) => {
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
         , disable_web_page_preview: true };
     const replyText = ctx.state.folders.description.slice(0, replyTextMaxLength)
-        || 'default decryption';
+        || replies.docs.defaultDescription;
     return ctx.replyWithMarkdown(
         replyText, replyOptions
     ).then(next).catch(console.error);
