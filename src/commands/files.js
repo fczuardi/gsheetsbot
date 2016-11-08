@@ -33,8 +33,9 @@ const makeKeyboard = (ctx, next) => {
 
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
         , disable_web_page_preview: true };
-    const replyText = ctx.state.folders.description.slice(0, replyTextMaxLength)
-        || replies.docs.defaultDescription;
+    const folderDescription = ctx.state.folders.description
+        || replies.docs.defaultDescription || '';
+    const replyText = folderDescription.slice(0, replyTextMaxLength);
     return ctx.replyWithMarkdown(
         replyText, replyOptions
     ).then(next).catch(console.error);
