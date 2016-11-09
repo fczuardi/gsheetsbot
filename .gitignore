@@ -2,5 +2,6 @@ node_modules/
 config.toml
 client_secret.json
 *.log
+tmp/*
+!tmp/.keep
 
-tmp
