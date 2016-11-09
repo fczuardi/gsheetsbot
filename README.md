@@ -97,9 +97,11 @@ git branch --set-upstream-to heroku/master
 and push this local branch to heroku
 
 ```
+git checkout secret-branch
 $EDITOR .gitignore
-
+git push
 ```
+
 Dependencies
 ------------
 
