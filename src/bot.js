@@ -44,18 +44,20 @@ bot.on('text', (ctx, next) => {
         case 'signup':
             ctx.session.answers.push(text);
             return Telegraf.compose(commands[awaitingInput])(ctx, next);
-            break;
         case 'editAnswer':
-            ctx.session.answers[ctx.session.answerToEdit] = text;
+            ctx.session.answers[ctx.session.answerToEdit] = text; // eslint-disable-line
             return Telegraf.compose(actions.reviewUserForm)(ctx, next);
-            break;
         default:
-            break;
+            return next();
         }
     }
     return next();
 });
 // bot daemon start
-// TODO: replace polling with webhooks
-bot.startPolling();
+if (process.env.NODE_ENV === 'development') {
+    bot.startPolling();
+} else {
+    bot.telegram.setWebhook(`${config.webhook.url}${config.webhook.path}`);
+    bot.startWebhook(config.webhook.path, null, config.webhook.port);
+}
 

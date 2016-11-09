@@ -10,8 +10,9 @@
   "author": "Fabricio C Zuardi <fabricio@fabricio.org>",
   "license": "MIT",
   "scripts": {
-    "dev": "pm2 start development.pm2.json",
-    "start": "pm2 start production.pm2.json",
+    "start": "node src/bot.js",
+    "dev": "NODE_ENV=development pm2 start development.pm2.json",
+    "do:start": "pm2 start production.pm2.json",
     "stop": "pm2 kill",
     "logs": "pm2 logs",
     "monit": "pm2 monit",

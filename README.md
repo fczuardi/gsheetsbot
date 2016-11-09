@@ -80,20 +80,23 @@ heroku login
 
 2. Go to heroku.com and create a new app
 
-3. Setup a git remote named heroku to be your production remote:
+3. Update your config.toml file to include your heroku app url under the 
+[webkook] section 
+
+4. Setup a git remote named heroku to be your production remote:
 
 ```
 heroku git:remote -a your-heroku-app-name
 ```
 
-4. Create a local branch that includes your secrets:
+5. Create a local branch that includes your secrets:
 
 ```
 git checkout -b secret-branch
 git branch --set-upstream-to heroku/master
 ```
 
-5. On your secret local branch, remove config.toml from the .gitignore file
+6. On your secret local branch, remove config.toml from the .gitignore file
 and push this local branch to heroku
 
 ```

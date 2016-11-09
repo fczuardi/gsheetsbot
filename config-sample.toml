@@ -1,6 +1,10 @@
 [api]
 port = 58337
 
+[webhook]
+url = "https://YOUR_APP_NAME.herokuapp.com/"
+port = 8070
+
 # winston File transport options
 # see https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport
 [log]
