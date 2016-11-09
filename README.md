@@ -108,6 +108,19 @@ git commit -m "exposing my secrets to heroku"
 git push
 ```
 
+7. Launch your bot and follow the debug logs
+
+```
+heroku ps:scale worker=1
+heroku logs --tail
+```
+
+8. Stop bot
+
+```
+heroku ps:scale worker=0
+```
+
 Dependencies
 ------------
 
