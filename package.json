@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A Telegram bot with a Google Sheets backend",
   "main": "src/bot.js",
+  "engines": {
+    "node": "6.1.0"
+  },
   "repository": {
     "url": "git@github.com:fczuardi/gsheetsbot.git",
     "type": "git"
