@@ -64,6 +64,42 @@ yarn logs
 yarn stop
 ```
 
+Deploying to Heroku
+-------------------
+
+After testing your bot locally, you can deploy it to heroku using the heroku
+cli and a local secret branch that don't gitignore your config.toml file.
+
+Here is how to make this:
+
+1. Login to heroku using the cli:
+
+```
+heroku login
+```
+
+2. Go to heroku.com and create a new app
+
+3. Setup a git remote named heroku to be your production remote:
+
+```
+heroku git:remote -a your-heroku-app-name
+```
+
+4. Create a local branch that includes your secrets:
+
+```
+git checkout -b secret-branch
+git branch --set-upstream-to heroku/master
+```
+
+5. On your secret local branch, remove config.toml from the .gitignore file
+and push this local branch to heroku
+
+```
+$EDITOR .gitignore
+
+```
 Dependencies
 ------------
 
