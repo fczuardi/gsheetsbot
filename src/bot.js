@@ -62,8 +62,8 @@ if (process.env.NODE_ENV === 'development') {
 } else {
     console.log('set webhook');
     bot.telegram.setWebHook(`${config.webhook.url}${config.webhook.path}`);
-    bot.startWebHook(config.webhook.path, null, config.webhook.port);
-    const webhookUrl = `${config.webhook.url}${config.webhook.path}:${config.webhook.port}`;
+    bot.startWebHook(config.webhook.path, null, process.env.PORT);
+    const webhookUrl = `${config.webhook.url}${config.webhook.path}:${process.env.PORT}`;
     console.log('Bot listening on:', webhookUrl);
 }
 
