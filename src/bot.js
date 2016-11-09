@@ -53,17 +53,9 @@ bot.on('text', (ctx, next) => {
     }
     return next();
 });
-// bot daemon start
-// if (process.env.NODE_ENV === 'development') {
-    bot.telegram.removeWebHook().then(() => {
-        bot.startPolling();
-        console.log('Bot started in polling mode');
-    });
-// } else {
-    // console.log('set webhook');
-    // const webhookUrl = `${config.webhook.url}${config.webhook.path}:${process.env.PORT}`;
-    // bot.telegram.setWebHook(webhookUrl);
-    // bot.startWebHook(config.webhook.path, null, process.env.PORT);
-    // console.log('Bot listening on:', webhookUrl);
-// }
+// TODO get webhooks to work on heroku
+bot.telegram.removeWebHook().then(() => {
+    bot.startPolling();
+    console.log('Bot started in polling mode');
+});
 

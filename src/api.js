@@ -31,5 +31,7 @@ refreshToken = "${tokens.refresh_token}"
     });
 });
 
-app.listen(config.api.port);
+const port = process.env.PORT || config.api.port;
+console.log('API listening to PORT', port);
+app.listen(port);
 
