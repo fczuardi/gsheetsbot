@@ -55,9 +55,15 @@ bot.on('text', (ctx, next) => {
 });
 // bot daemon start
 if (process.env.NODE_ENV === 'development') {
-    bot.startPolling();
+    bot.telegram.removeWebHook().then(() => {
+        bot.startPolling();
+        console.log('Bot started in polling mode');
+    });
 } else {
-    bot.telegram.setWebhook(`${config.webhook.url}${config.webhook.path}`);
-    bot.startWebhook(config.webhook.path, null, config.webhook.port);
+    console.log('set webhook');
+    bot.telegram.setWebHook(`${config.webhook.url}${config.webhook.path}`);
+    bot.startWebHook(config.webhook.path, null, config.webhook.port);
+    const webhookUrl = `${config.webhook.url}${config.webhook.path}:${config.webhook.port}`;
+    console.log('Bot listening on:', webhookUrl);
 }
 
