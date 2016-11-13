@@ -45,7 +45,11 @@ const filesToState = tgd.getFolder({ rootId, fields, auth: oauthClient });
 
 /* Sets message description to ctx.state.folder.description from google drive README.md file
  */
-const setDescription = tgd.setDescription({ path: config.drive.tempFolder , auth: oauthClient}); //eslint-disable-line
+const setDescription = tgd.setDescription(
+    { path: config.drive.tempFolder
+    , auth: oauthClient
+    }
+);
 
 module.exports = [
     filesToState

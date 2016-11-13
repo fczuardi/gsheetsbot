@@ -20,7 +20,7 @@ const setupState = (ctx, next) => {
         , loginUrl
         }
     );
-    ctx.state = nextState; // eslint-disable-line
+    ctx.state = nextState;
     return next();
 };
 

@@ -17,8 +17,8 @@ const setCurrentFile = (ctx, next) => {
             fileId
             , fileType
         } });
-    ctx.state = nextState; //eslint-disable-line
     console.log('ctx.state ', ctx.state);
+    ctx.state = nextState;
     return next();
 };
 

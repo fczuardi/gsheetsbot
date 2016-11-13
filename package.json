@@ -36,7 +36,10 @@
     "xtend": "^4.0.1"
   },
   "eslintConfig": {
-    "extends": "mnmo"
+    "extends": "mnmo",
+    "rules": {
+      "no-param-reassign": [ "error", { "props": false } ]
+    }
   },
   "devDependencies": {
     "eslint": "^3.9.1",

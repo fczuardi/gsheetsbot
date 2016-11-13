@@ -37,13 +37,13 @@ const writeFormRow = (ctx, next) => {
     return tgs.appendRow(
         extend(params, { resource })
     ).then(() => {
-        ctx.state.submitError = false; // eslint-disable-line
+        ctx.state.submitError = false;
         return ctx.editMessageText(
             replies.signup.submissionSent
         ).then(next);
     }).catch(err => {
         console.error(err);
-        ctx.state.submitError = true; // eslint-disable-line
+        ctx.state.submitError = true;
         return ctx.editMessageText(
             replies.signup.submissionError
         ).then(next);

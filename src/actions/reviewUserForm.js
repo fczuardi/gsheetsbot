@@ -39,8 +39,8 @@ const chooseAnswer = (ctx, next) => {
         { text: replies.signup.submitButton
         , callback_data: 'submitUserForm'
         } ];
-    ctx.session.questions = questions; // eslint-disable-line
     console.log('ctx.updateType', ctx.updateType);
+    ctx.session.questions = questions;
     if (ctx.updateType === 'callback_query') {
         return ctx.editMessageText(replyText,
             { parse_mode: 'Markdown'

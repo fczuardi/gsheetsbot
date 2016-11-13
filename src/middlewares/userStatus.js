@@ -27,7 +27,7 @@ const userStatusMiddleware = (ctx, next) => {
         };
 
     const nextState = extend(ctx.state, newProperties);
-    ctx.state = nextState; // eslint-disable-line
+    ctx.state = nextState;
     return next();
 };
 

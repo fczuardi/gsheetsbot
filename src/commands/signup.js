@@ -28,8 +28,8 @@ const nextQuestion = (ctx, next) => {
         const varName = questions[index][0];
         return extend(prev, { [varName]: answer });
     }, {});
-    ctx.session.awaitingInput = 'signup'; // eslint-disable-line
-    ctx.session.answers = userAnswers; // eslint-disable-line
+    ctx.session.awaitingInput = 'signup';
+    ctx.session.answers = userAnswers;
     return ctx.replyWithMarkdown(
         template(answersObj)
     ).then(next).catch(console.error);
@@ -37,7 +37,6 @@ const nextQuestion = (ctx, next) => {
 
 const signupEnd = (ctx, next) => {
     console.log('signupEnd', next);
-    ctx.session.awaitingInput = null; // eslint-disable-line
     const inlineKeyboard = [ [
         { text: replies.signup.submitButton
         , callback_data: 'submitUserForm'
@@ -50,6 +49,7 @@ const signupEnd = (ctx, next) => {
     const replyText = ctx.state.submitError
         ? replies.signup.retryFormFinished
         : replies.signup.formFinished;
+    ctx.session.awaitingInput = null;
     return ctx.reply(
         replyText, replyOptions
     ).then(next).catch(console.error);

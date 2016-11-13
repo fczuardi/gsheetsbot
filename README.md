@@ -6,7 +6,7 @@ Work in progress
 - [x] admin command to give bot Google Sheets permissions
 - [x] log all telegram updates on a log file
 - [x] /status command for pending-approval users
-- [ ] /signup command for new users
+- [x] /signup command for new users
   - [x] read questions and review button namesfrom one sheetName
   - [x] choice to submit or review answers
   - [x] submit: write answers on a different sheetName

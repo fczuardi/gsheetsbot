@@ -14,8 +14,8 @@ const messageDataParser = (ctx, next) => {
         return next();
     }
     const { text, date } = message;
-    const { first_name, last_name, username, id } = ctx.from;
-    const displayName = [first_name, last_name] //eslint-disable-line
+    const { first_name: firstName, last_name: lastName, username, id } = ctx.from;
+    const displayName = [ firstName, lastName ]
         .filter(name => name !== undefined)
         .join(' ') || username;
     const nextState = extend(ctx.state,
@@ -25,7 +25,7 @@ const messageDataParser = (ctx, next) => {
         , timestamp: date
         }
     );
-    ctx.state = nextState; // eslint-disable-line
+    ctx.state = nextState;
     return next();
 };
 
