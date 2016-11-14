@@ -18,7 +18,7 @@ const chooseAnswer = (ctx, next) => {
     const questions = getQuestions(ctx);
     const answers = ctx.session.answers;
 
-    const lastLine = '\nQuer editar alguma resposta?';
+    const lastLine = `\n${replies.signup.reviewQuestionsFooter}`;
     const replyText = questions.reduce((prev, questionRow, index) => {
         const line = `*${index + 1}. ${questionRow[1]}:* ${answers[index]}\n`;
         return index === questions.length - 1
@@ -68,7 +68,7 @@ const reviewUserForm = Telegraf.branch(
 );
 
 const callbackEnd = (ctx, next) => {
-    if (ctx.updateType !== 'callback_query'){
+    if (ctx.updateType !== 'callback_query') {
         return next();
     }
     ctx.answerCallbackQuery().catch(err => console.error(err));

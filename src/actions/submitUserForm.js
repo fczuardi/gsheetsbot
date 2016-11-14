@@ -22,15 +22,15 @@ const params =
     };
 
 const writeFormRow = (ctx, next) => {
-    // console.log('---writeFormRow---', ctx.callbackQuery.id);
+    console.log('---writeFormRow---', ctx.callbackQuery.id);
     const { answers } = ctx.session;
     const resource =
         { majorDimension
         , values: [
             [ ...answers
             , ctx.callbackQuery.message.date
-            , ctx.from.id
             , JSON.stringify(ctx.from)
+            , ctx.from.id
             ] ]
         , range
         };

@@ -4,7 +4,6 @@ port = 58337
 [webhook]
 url = "https://YOUR_APP_NAME.herokuapp.com/"
 path = "your-super-secret-path"
-port = 8070
 
 # winston File transport options
 # see https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport
@@ -45,23 +44,24 @@ url = ""
 # with multiple choice answer separated by the | character
 questions = "Questions User!A2:D"
 
-# remember to leave 3 extra adjacent columns free
-# for telegram metadata and include those extra 3 columns in the range
-# example, if your form has 9 questions, from A to I, your
-# range needs to go from A to L
-answers = "Answers Users!A2:L2"
+# a table to store user given answers
+# plus 3 columns for telegram metadata: timestamp, tgfrom and userId
+answers = "Answers Users!A2:L"
 
 # what range to look for user application status
-status = "'Users Statuses'!A2:C"
+# this should be 3 columns: status, notes and userId
+status = "Answers Users!L2:N"
 
 # Which columns to look for the userId and approved state.
-# Example: if the status column is A, the value is 0
-# if the status column is H, the value is 7
+# Example: if the status column is the first of the range, the value is 0
+# if the userId column is the third one, the value is 2
 statusUserId = 0
 statusColumn = 1
+statusNotesColumn = 2
 
 # The value in the status column to consider an user approved
 approvedValue = "Approved"
+deniedValue = "Denied"
 
 [sheets.school]
 questions = "Questions School!A2:D11"
@@ -75,7 +75,7 @@ rootId = ""
 
 # path variable used inside program to save temp data.
 # don't forget to create this folder
-tempFolder = ""
+tempFolder = "./tmp"
 
 # Those are the parameters used when making the request to google drive's
 # API service

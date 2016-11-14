@@ -12,14 +12,18 @@ const token =
     { unauthorized: 'Você não está na lista de administradores.'
     };
 const status =
-    { signup: 'Gostaria de se inscrever no programa?'
-    , approved: 'Parabéns sua inscrição foi aceita!'
+    { pending: 'Sua inscrição ainda está sendo analizada, aguarde uns dias e verifique novamente usando o commando /status'
+    , approved: 'Parabéns sua inscrição foi aceita! Digite /start para acessar o menu principal'
+    , unapproved: reason => (reason
+        ? `Sua inscrição não foi aceita, motivo: ${reason}`
+        : 'Sua inscrição não foi aceita.')
     };
 const signup =
     { formFinished: 'Formulário preenchido, quer enviar já ou revisar alguma resposta?'
     , retryFormFinished: 'Deseja tentar novamente?'
     , submitButton: 'Enviar'
     , reviewButton: 'Revisar'
+    , reviewQuestionsFooter: 'Quer editar alguma resposta?'
     , submissionError: 'Ocorreu um erro no envio.'
     , emptyAnswersError: 'Perdi suas respostas, vamos tentar de novo.'
     , submissionSent: 'Sua inscrição foi enviada! Entraremos em contato. Caso queira acompanhar o estado de sua aplicação, digite /status.'
