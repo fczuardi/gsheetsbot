@@ -6,17 +6,14 @@ const signupCommand = require('./signup');
 const statusCommand = require('./status');
 const Telegraf = require('telegraf');
 
-const welcome = (ctx, next) =>
-    ctx.reply(replies.start.welcome(ctx.state.displayName))
-    .then(next)
-    .catch(err => console.error(err));
-
 const newUser = Telegraf.compose(signupCommand);
 
 const unapprovedUser = Telegraf.compose(statusCommand);
 
-const menu = (ctx, next) =>
-    ctx.reply('TBD (menu)').then(next);
+const menu = (ctx, next) => {
+    console.log('menu -- --');
+    return ctx.reply('TBD (menu)').then(next);
+};
 
 const start = Telegraf.branch(ctx => ctx.state.userHasApplied,
     Telegraf.branch(ctx => ctx.state.userIsApproved,
@@ -27,8 +24,7 @@ const start = Telegraf.branch(ctx => ctx.state.userHasApplied,
 );
 
 const command =
-    [ welcome
-    , loadSheet(config.sheets.user.status)
+    [ loadSheet(config.sheets.user.status)
     , userStatusMiddleware
     , start
     ];

@@ -1,12 +1,17 @@
 /* eslint max-len: "off" */
 const tos =
-    { text: 'Por favor leia os termos do programa, é preciso que você aceite-os antes de começar a interagir com este bot.'
+    { text: url => `Mas antes de seguirmos em frente eu preciso que você leia e aceite os [termos de uso](${url}) do programa.`
     , accept: 'Eu li e aceito os termos'
     , deny: 'Eu não aceito os termos'
     , deniedReply: 'Tudo bem, caso mude de idéia e queira aceitar os termos basta clicar no botão'
     };
 const start =
-    { welcome: username => `Olá ${username}`
+    { welcome: username =>
+        [ `Olá ${username}! Seja bem-vinda ao *eduEmbaixadores*, programa de Embaixadores Mind Lab!`
+        , 'Convidamos pessoas como você, apaixonadas por transformar a educação para ajudar a difundir nossas soluções inovadoras!'
+        , 'Participando das Missões de Embaixadores, você divulgará as propostas da Mind Lab e oferecerá oportunidades especiais para escolas, ajudará a transformar a educação no Brasil e ainda poderá ser premiado por isso!'
+        ]
+    , 
     };
 const token =
     { unauthorized: 'Você não está na lista de administradores.'
