@@ -1,5 +1,6 @@
-const loadSheetDataMiddleware = require('../middlewares/load');
-const userStatus = require('../middlewares/userStatus');
+const loadSheet = require('../middlewares/load');
+const userStatusMiddleware = require('../middlewares/userStatus');
+const config = require('../config');
 const replies = require('../replies');
 
 const welcome = (ctx, next) =>
@@ -22,8 +23,8 @@ const menu = ctx => ctx.reply('TBD (menu)');
 
 const command =
     [ welcome
-    , loadSheetDataMiddleware
-    , userStatus
+    , loadSheet(config.sheets.user.status)
+    , userStatusMiddleware
     , start
     , menu
     ];

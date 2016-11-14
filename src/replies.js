@@ -1,4 +1,10 @@
 /* eslint max-len: "off" */
+const tos =
+    { text: 'Por favor leia os termos do programa, é preciso que você aceite-os antes de começar a interagir com este bot.'
+    , accept: 'Eu li e aceito os termos'
+    , deny: 'Eu não aceito os termos'
+    , deniedReply: 'Tudo bem, caso mude de idéia e queira aceitar os termos basta clicar no botão'
+    };
 const start =
     { welcome: username => `Olá ${username}`
     };
@@ -22,7 +28,8 @@ const docs =
     { defaultDescription: 'Escolha uma opção:'
     };
 const replies =
-    { status
+    { tos
+    , status
     , start
     , signup
     , token

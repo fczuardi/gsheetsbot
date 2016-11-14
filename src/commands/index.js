@@ -1,4 +1,4 @@
-// const start = require('./start');
+const start = require('./start');
 const signup = require('./signup');
 const status = require('./status');
 const token = require('./token');
@@ -9,7 +9,7 @@ const files = require('./files');
 const commands =
     { status
     , signup
-    // , start
+    , start
     , token
     , help
     , files
