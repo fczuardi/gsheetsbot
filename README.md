@@ -1,25 +1,17 @@
 Work in progress
 ----------------
 
-- [x] launch bot based on botfather credentials
-- [x] launch express app to listen http requests such as oauth redirect
-- [x] admin command to give bot Google Sheets permissions
-- [x] log all telegram updates on a log file
-- [x] /status command for pending-approval users
-- [x] /signup command for new users
-    - [x] read questions and review button namesfrom one sheetName
-    - [x] choice to submit or review answers
-    - [x] submit: write answers on a different sheetName
-    - [x] review: inline buttons navigation to show answers content 
-  and OK / Edit buttons
-- [ ] gdrive (/files)
-    - [x] google drive middleware
-    - [x] gdrive use a README.md in the folder root as an intro message
-    - [ ] gdrive folder navigation
 - [ ] /start command for new users
-    - [ ] tos acceptance flow
-- [ ] /indicar command for approved users
-- [ ] /status command for approved users
+    - [x] tos acceptance flow
+    - [ ] if not on the sheet, redirect to /signup
+    - [ ] if not approved yet, send a message about the application process
+    - [ ] if approved, display main menu
+- [ ] Main menu
+    - [ ] /indicar command for approved users
+    - [ ] /status command for approved users
+- Other tasks / pieces
+- [ ] gdrive (/files)
+    - [ ] gdrive folder navigation
 - [ ] better docs on how to setup a google console app
 - [ ] help command
 
