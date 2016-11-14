@@ -16,13 +16,13 @@ bot.use(Telegraf.memorySession());
 bot.use(debugMiddleware);
 // log all telegram updates to a log file
 bot.use(logMiddleware(config.log));
-// check if the user has accepted the terms and if not, present it to her
-bot.use(termsOfService);
 // add flags to check if the user has admin privileges to the state
 bot.use(adminMiddleware);
 // add a displayName property to the state
 // build from first/last/username when available
 bot.use(userMiddleware);
+// check if the user has accepted the terms and if not, present it to her
+bot.use(termsOfService);
 // setup all /commandName commands see src/commands/index.js
 Object.keys(commands).forEach(name => {
     bot.command(name, ...commands[name]);
@@ -43,16 +43,8 @@ bot.on('text', (ctx, next) => {
         return next();
     }
     const awaitingInput = ctx.session.awaitingInput;
-    const hasAccepted = (text === replies.tos.accept);
     if (awaitingInput) {
         switch (awaitingInput) {
-        case 'tos':
-            ctx.session.awaitingInput = null;
-            ctx.session.acceptedTOS = hasAccepted;
-            if (hasAccepted) {
-                return Telegraf.compose(commands.start)(ctx, next);
-            }
-            return termsOfService(ctx, next);
         case 'signup':
             ctx.session.answers.push(text);
             return Telegraf.compose(commands[awaitingInput])(ctx, next);

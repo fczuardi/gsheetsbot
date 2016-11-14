@@ -1,13 +1,23 @@
+const Telegraf = require('telegraf');
+const startCommand = require('../commands/start');
 const replies = require('../replies');
 const termsOfService = (ctx, next) => {
     const hasAccepted = ctx.session.acceptedTOS;
+
     // continue if the user have accepted the terms already
-    if (hasAccepted || ctx.session.awaitingInput) {
+    if (hasAccepted) {
         return next();
     }
 
-    // set session.awaitingInput to 'tos'
-    ctx.session.awaitingInput = 'tos';
+    const message = ctx.update.message || { text: '' };
+    const text = message.text;
+    const hasJustAccepted = (text === replies.tos.accept);
+    ctx.session.acceptedTOS = hasJustAccepted;
+
+    // start flow if the user just accepted
+    if (hasJustAccepted) {
+        return Telegraf.compose(startCommand)(ctx, next);
+    }
 
     // TOS text to show to the user
     const tosText = hasAccepted === undefined
