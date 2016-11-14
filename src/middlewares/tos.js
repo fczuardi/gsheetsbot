@@ -38,7 +38,7 @@ const termsOfService = (ctx, next) => {
 
     const finalLine = () => ctx.replyWithMarkdown(tosText,
         { reply_markup: replyKeyboard
-        , disable_web_page_preview: true 
+        , disable_web_page_preview: true
         }
     );
 

@@ -1,7 +1,6 @@
 const loadSheet = require('../middlewares/load');
 const userStatusMiddleware = require('../middlewares/userStatus');
 const config = require('../config');
-const replies = require('../replies');
 const signupCommand = require('./signup');
 const statusCommand = require('./status');
 const Telegraf = require('telegraf');
