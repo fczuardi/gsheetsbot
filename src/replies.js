@@ -12,7 +12,6 @@ const start =
         , 'Convidamos pessoas como você, apaixonadas por transformar a educação para ajudar a difundir nossas soluções inovadoras!'
         , 'Participando das Missões de Embaixadores, você divulgará as propostas da Mind Lab e oferecerá oportunidades especiais para escolas, ajudará a transformar a educação no Brasil e ainda poderá ser premiado por isso!'
         ]
-    , 
     };
 const token =
     { unauthorized: 'Você não está na lista de administradores.'
@@ -25,7 +24,8 @@ const status =
         : 'Sua inscrição não foi aceita.')
     };
 const signup =
-    { formFinished: 'Formulário preenchido, quer enviar já ou revisar alguma resposta?'
+    { formStart: 'Para continuar preciso saber algumas coisas sobre você…'
+    , formFinished: 'Formulário preenchido, quer enviar já ou revisar alguma resposta?'
     , retryFormFinished: 'Deseja tentar novamente?'
     , submitButton: 'Enviar'
     , reviewButton: 'Revisar'
