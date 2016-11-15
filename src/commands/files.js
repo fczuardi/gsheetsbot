@@ -1,3 +1,5 @@
+const Telegraf = require('telegraf');
+const extend = require('xtend');
 const tgd = require('telegraf-googledrive');
 const replies = require('../replies');
 const config = require('../config');
@@ -9,14 +11,22 @@ const replyTextMaxLength = 309;
 const { rootId, fields } = config.drive;
 
 const makeKeyboard = (ctx, next) => {
-    const folders = ctx.state.folders[rootId];
-    const inlineKeyboard = folders.map(file => {
+    // console.log('state folders', JSON.stringify(ctx.state.folders, ' ', 2));
+    if (!ctx.state.folders) {
+        console.error('folder no longer on state');
+        return next();
+    }
+    const folders = ctx.state.folders[ctx.state.rootId || rootId];
+    const filesKeyboard = folders.map(file => {
         const isSubFolder = (file.mimeType === 'application/vnd.google-apps.folder');
         const isReadme = file.name.toLowerCase() === 'readme.md';
 
         if (isReadme) { return null; }
 
         if (isSubFolder) {
+            const parents = ctx.session.parents || {};
+            const newParents = extend(parents, { [file.id]: file.parents[0] });
+            ctx.session.parents = newParents;
             return [
                 { text: file.name
                 , callback_data: `changeFolder ${file.id}`
@@ -30,7 +40,8 @@ const makeKeyboard = (ctx, next) => {
         ];
     }).filter(i => i !== null);
 
-    inlineKeyboard.concat(ctx.state.defaultKeyboard || []);
+    console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
+    const inlineKeyboard = filesKeyboard.concat(ctx.state.defaultKeyboard || []);
 
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
         , disable_web_page_preview: true };
@@ -48,7 +59,13 @@ const makeKeyboard = (ctx, next) => {
     return lastReply();
 };
 
-const filesToState = tgd.getFolder({ rootId, fields, auth: oauthClient });
+const filesToStateDefault = tgd.getFolder({ rootId, fields, auth: oauthClient });
+const filesToStateWithoutRoot = tgd.getFolder({ fields, auth: oauthClient });
+
+const filesToState = Telegraf.branch(ctx => ctx.state.rootId,
+    filesToStateWithoutRoot,
+    filesToStateDefault
+);
 
 /* Sets message description to ctx.state.folder.description from google drive README.md file
  */
@@ -58,9 +75,21 @@ const setDescription = tgd.setDescription(
     }
 );
 
-module.exports = [
-    filesToState
+const callbackEnd = (ctx, next) => {
+    if (ctx.updateType !== 'callback_query'){
+        return next();
+    }
+    return ctx.editMessageReplyMarkup().then(() =>
+        ctx.answerCallbackQuery().then(next).catch(console.error)
+    );
+}
+
+const command =
+    [ filesToState
     , setDescription
+    , callbackEnd
     , makeKeyboard
-];
+    ];
+
+module.exports = command;
 
