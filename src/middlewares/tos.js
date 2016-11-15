@@ -20,7 +20,8 @@ const termsOfService = (ctx, next) => {
 
     // start flow if the user just accepted
     if (hasJustAccepted) {
-        return ctx.reply(replies.tos.accepted).then(() =>
+        const hideKeyboard = { reply_markup: { hide_keyboard: true } };
+        return ctx.reply(replies.tos.accepted, hideKeyboard).then(() =>
             Telegraf.compose(startCommand)(ctx, next)
         );
     }
@@ -32,8 +33,7 @@ const termsOfService = (ctx, next) => {
 
     // custom keyboard with I agree / I do not agree replies
     const replyKeyboard =
-        { one_time_keyboard: true
-        , keyboard: [
+        { keyboard: [
             [ { text: replies.tos.accept }
             , { text: replies.tos.deny }
             ]
