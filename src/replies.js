@@ -46,6 +46,7 @@ const school =
     { submissionSent: [ 'Sua indicação foi enviada com sucesso. Digite /status para acompanhar o progresso dessa indicação.'
         , 'Ou digite /indicar para indicar outra escola nesta mesma missão.'
         , 'Ou digite /start para voltar ao menu principal.' ]
+    , statusLine: s => `*${s.name}*: ${s.status === undefined ? 'indicada' : s.status}${s.notes ? `, ${s.notes}` : ''}`
     };
 
 const docs =
