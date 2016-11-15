@@ -2,16 +2,11 @@ Work in progress
 ----------------
 
 - [ ] /start command for new users
-    - [x] tos acceptance flow
-    - [ ] if not on the sheet, redirect to /signup
-    - [ ] if not approved yet, send a message about the application process
     - [ ] if approved, display main menu
 - [ ] Main menu
     - [ ] /indicar command for approved users
     - [ ] /status command for approved users
 - Other tasks / pieces
-- [ ] gdrive (/files)
-    - [ ] gdrive folder navigation
 - [ ] better docs on how to setup a google console app
 - [ ] help command
 
@@ -74,8 +69,8 @@ heroku login
 
 2. Go to heroku.com and create a new app
 
-3. Update your config.toml file to include your heroku app url under the 
-[webkook] section 
+3. Update your config.toml file to include your heroku app url under the
+[webkook] section
 
 4. Setup a git remote named heroku to be your production remote:
 
