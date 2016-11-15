@@ -1,17 +1,3 @@
-Work in progress
-----------------
-
-- Other tasks / pieces
-- [ ] better docs on how to setup a google console app
-- [ ] help command
-
-
-Other notes / tasks / whishlist
--------------------------------
-- [x] give user typing feedback when loading data
-- [ ] form validation
-- [ ] setup CI
-
 Contributing
 ------------
 
