@@ -59,28 +59,26 @@ Here is how to make this:
 1. Login to heroku using the cli:
 
 ```
+yarn stop
 heroku login
 ```
 
 2. Go to heroku.com and create a new app
 
-3. Update your config.toml file to include your heroku app url under the
-[webkook] section
-
-4. Setup a git remote named heroku to be your production remote:
+3. Setup a git remote named heroku to be your production remote:
 
 ```
 heroku git:remote -a your-heroku-app-name
 ```
 
-5. Create a local branch that includes your secrets:
+4. Create a local branch that includes your secrets:
 
 ```
 git checkout -b secret-branch
 git branch --set-upstream-to heroku/master
 ```
 
-6. On your secret local branch, remove config.toml from the .gitignore file
+5. On your secret local branch, remove config.toml from the .gitignore file
 and push this local branch to heroku
 
 ```
@@ -92,20 +90,20 @@ git commit -m "exposing my secrets to heroku"
 git push
 ```
 
-7. Launch your bot and follow the debug logs
+6. Launch your bot and follow the debug logs
 
 ```
 heroku ps:scale worker=1
 heroku logs --tail
 ```
 
-8. Stop bot
+7. Stop bot
 
 ```
 heroku ps:scale worker=0
 ```
 
-9. Change back to your local dev branch copying config.toml
+8. Change back to your local dev branch copying config.toml
 from the secret heroku branch
 
 ```
