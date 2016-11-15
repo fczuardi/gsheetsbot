@@ -1,9 +1,6 @@
 Work in progress
 ----------------
 
-- [ ] Main menu
-    - [ ] /indicar command for approved users
-    - [ ] /status command for approved users
 - Other tasks / pieces
 - [ ] better docs on how to setup a google console app
 - [ ] help command
