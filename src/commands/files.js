@@ -2,19 +2,18 @@ const tgd = require('telegraf-googledrive');
 const replies = require('../replies');
 const config = require('../config');
 const oauthClient = require('../oauth');
+const sequenceReply = require('../sequenceReply');
 
 const replyTextMaxLength = 309;
 
 const { rootId, fields } = config.drive;
 
 const makeKeyboard = (ctx, next) => {
-    console.log('ctx.state: ', ctx.state.folders[rootId]);
-
     const folders = ctx.state.folders[rootId];
     const inlineKeyboard = folders.map(file => {
         const isSubFolder = (file.mimeType === 'application/vnd.google-apps.folder');
         const isReadme = file.name.toLowerCase() === 'readme.md';
- 
+
         if (isReadme) { return null; }
 
         if (isSubFolder) {
@@ -32,16 +31,21 @@ const makeKeyboard = (ctx, next) => {
     }).filter(i => i !== null);
 
     inlineKeyboard.concat(ctx.state.defaultKeyboard || []);
-    console.log('inlineKeyboard', inlineKeyboard);
 
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
         , disable_web_page_preview: true };
     const folderDescription = ctx.state.folders.description
         || replies.docs.defaultDescription || '';
-    const replyText = folderDescription.slice(0, replyTextMaxLength);
-    return ctx.replyWithMarkdown(
-        replyText, replyOptions
+    const paragraphs = folderDescription.split('\n')
+            .filter(line => line.trim().length > 0)
+            .map(line => line.slice(0, replyTextMaxLength));
+    const lastReply = () => ctx.replyWithMarkdown(
+        paragraphs[paragraphs.length - 1], replyOptions
     ).then(next).catch(console.error);
+    if (paragraphs.length) {
+        return sequenceReply(ctx, paragraphs.slice(0, -1)).then(lastReply);
+    }
+    return lastReply();
 };
 
 const filesToState = tgd.getFolder({ rootId, fields, auth: oauthClient });
