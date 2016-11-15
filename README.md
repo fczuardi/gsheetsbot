@@ -1,8 +1,6 @@
 Work in progress
 ----------------
 
-- [ ] /start command for new users
-    - [ ] if approved, display main menu
 - [ ] Main menu
     - [ ] /indicar command for approved users
     - [ ] /status command for approved users

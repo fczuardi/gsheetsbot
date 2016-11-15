@@ -76,13 +76,13 @@ const setDescription = tgd.setDescription(
 );
 
 const callbackEnd = (ctx, next) => {
-    if (ctx.updateType !== 'callback_query'){
+    if (ctx.updateType !== 'callback_query') {
         return next();
     }
     return ctx.editMessageReplyMarkup().then(() =>
         ctx.answerCallbackQuery().then(next).catch(console.error)
     );
-}
+};
 
 const command =
     [ filesToState

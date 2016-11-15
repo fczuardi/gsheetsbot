@@ -46,10 +46,16 @@ bot.on('text', (ctx, next) => {
         switch (awaitingInput) {
         case 'signup':
             ctx.session.answers.push(text);
-            return Telegraf.compose(commands[awaitingInput])(ctx, next);
+            return Telegraf.compose(commands.signup)(ctx, next);
+        case 'schoolForm':
+            ctx.session.schoolAnswers.push(text);
+            return Telegraf.compose(actions.schoolForm)(ctx, next);
         case 'editAnswer':
-            ctx.session.answers[ctx.session.answerToEdit] = text; // eslint-disable-line
+            ctx.session.answers[ctx.session.answerToEdit] = text;
             return Telegraf.compose(actions.reviewUserForm)(ctx, next);
+        case 'editSchoolAnswer':
+            ctx.session.schoolAnswers[ctx.session.answerToEdit] = text;
+            return Telegraf.compose(actions.reviewSchoolForm)(ctx, next);
         default:
             return next();
         }
