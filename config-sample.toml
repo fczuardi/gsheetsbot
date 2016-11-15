@@ -1,9 +1,13 @@
+[tos]
+url = "http://www.example.com/tos"
+
+[telegram]
+token = ""
+username = ""
+admins = ["fczuardi"]
+
 [api]
 port = 58337
-
-[webhook]
-url = "https://YOUR_APP_NAME.herokuapp.com/"
-path = "your-super-secret-path"
 
 # winston File transport options
 # see https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport
@@ -27,11 +31,6 @@ scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.readonly"
 ]
-
-[telegram]
-token = ""
-username = ""
-admins = ["fczuardi"]
 
 [sheets]
 # the share url of a google sheet

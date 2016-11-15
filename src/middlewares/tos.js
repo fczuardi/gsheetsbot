@@ -1,6 +1,7 @@
 const Telegraf = require('telegraf');
 const startCommand = require('../commands/start');
 const replies = require('../replies');
+const config = require('../config');
 const sequenceReply = require('../sequenceReply');
 
 const termsOfService = (ctx, next) => {
@@ -26,7 +27,7 @@ const termsOfService = (ctx, next) => {
 
     // TOS text to show to the user
     const tosText = !hasAnswered
-        ? replies.tos.text('http://www.example.com')
+        ? replies.tos.text(config.tos.url)
         : replies.tos.deniedReply;
 
     // custom keyboard with I agree / I do not agree replies
