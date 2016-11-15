@@ -1,6 +1,5 @@
 const Telegraf = require('telegraf');
 const config = require('./config');
-const replies = require('./replies');
 const debugMiddleware = require('./middlewares/debug');
 const logMiddleware = require('telegraf-logfile');
 const termsOfService = require('./middlewares/tos');

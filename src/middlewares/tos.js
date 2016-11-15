@@ -19,7 +19,9 @@ const termsOfService = (ctx, next) => {
 
     // start flow if the user just accepted
     if (hasJustAccepted) {
-        return Telegraf.compose(startCommand)(ctx, next);
+        return ctx.reply(replies.tos.accepted).then(() =>
+            Telegraf.compose(startCommand)(ctx, next)
+        );
     }
 
     // TOS text to show to the user

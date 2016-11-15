@@ -19,8 +19,7 @@ const isLastAnswer = ctx => getAnswers(ctx).length === getQuestions(ctx).length;
 const firstName = name => (name ? name.split(' ')[0] : '');
 Handlebars.registerHelper('firstName', firstName);
 
-const nextQuestion = (ctx, next) => {
-    console.log('ctx.state.sheets', ctx.state.sheets);
+const nextQuestion = ctx => {
     const questions = getQuestions(ctx);
     const userAnswers = getAnswers(ctx);
     const template = Handlebars.compile(questions[userAnswers.length][2]);
@@ -32,11 +31,10 @@ const nextQuestion = (ctx, next) => {
     ctx.session.answers = userAnswers;
     return ctx.replyWithMarkdown(
         template(answersObj)
-    ).then(next).catch(console.error);
+    ).catch(console.error);
 };
 
 const signupEnd = (ctx, next) => {
-    console.log('signupEnd', next);
     const inlineKeyboard = [ [
         { text: replies.signup.submitButton
         , callback_data: 'submitUserForm'

@@ -4,6 +4,7 @@ const tos =
     , accept: 'Eu li e aceito os termos'
     , deny: 'Eu não aceito os termos'
     , deniedReply: 'Tudo bem, caso mude de idéia e queira aceitar os termos basta clicar no botão'
+    , accepted: 'Ótimo! Então podemos seguir em frente! :)'
     };
 const start =
     { welcome: username =>
