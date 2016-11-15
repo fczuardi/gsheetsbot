@@ -66,6 +66,11 @@ deniedValue = "Denied"
 [sheets.school]
 questions = "Questions School!A2:D11"
 
+# a table to store user given answers
+# plus 4 columns for telegram metadata:
+# timestamp, missionId, messageId and userId
+answers = "Answers School!A2:N2"
+
 # Google drive variables
 [drive]
 

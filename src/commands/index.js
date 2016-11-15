@@ -5,6 +5,7 @@ const token = require('./token');
 const help = require('./help');
 const settings = require('./settings');
 const files = require('./files');
+const school = require('../actions/schoolForm');
 
 const commands =
     { status
@@ -13,6 +14,7 @@ const commands =
     , token
     , help
     , files
+    , indicar: school
     , settings
     };
 
