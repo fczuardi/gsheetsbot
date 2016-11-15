@@ -4,4 +4,4 @@ client_secret.json
 *.log
 tmp/*
 !tmp/.keep
-
+menus/

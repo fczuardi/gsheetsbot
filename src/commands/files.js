@@ -11,25 +11,28 @@ const makeKeyboard = (ctx, next) => {
     console.log('ctx.state: ', ctx.state.folders[rootId]);
 
     const folders = ctx.state.folders[rootId];
-    const inlineKeyboard = [];
-    folders.forEach(file => {
-        // this file is an subfolder
-        if (file.mimeType === 'application/vnd.google-apps.folder') {
-            inlineKeyboard.push([
+    const inlineKeyboard = folders.map(file => {
+        const isSubFolder = (file.mimeType === 'application/vnd.google-apps.folder');
+        const isReadme = file.name.toLowerCase() === 'readme.md';
+ 
+        if (isReadme) { return null; }
+
+        if (isSubFolder) {
+            return [
                 { text: file.name
-                    , callback_data: `changeFolder ${file.id}`
+                , callback_data: `changeFolder ${file.id}`
                 }
-            ]);
-        } else {
-            inlineKeyboard.push([
-                { text: file.name
-                    , callback_data: `sendFile ${file.id}`
-                }
-            ]);
+            ];
         }
-    });
+        return [
+            { text: file.name
+            , callback_data: `sendFile ${file.id}`
+            }
+        ];
+    }).filter(i => i !== null);
 
     inlineKeyboard.concat(ctx.state.defaultKeyboard || []);
+    console.log('inlineKeyboard', inlineKeyboard);
 
     const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
         , disable_web_page_preview: true };

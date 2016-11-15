@@ -18,7 +18,7 @@ const token =
     };
 const status =
     { pending: 'Sua inscrição ainda está sendo analizada, aguarde uns dias e verifique novamente usando o commando /status'
-    , approved: 'Oi! Boas notícias! Você foi aprovado no Programa de Embaixadores! 😍'
+    , approved: 'Oi! Boas notícias! Você foi aprovado no Programa de Embaixadores! 😍 Digite /start para acessar o menu principal.'
     , unapproved: reason => (reason
         ? `Oi! Infelizmente sua inscrição ao programa Embaixadores não foi aceita neste momento :( Motivo: ${reason}`
         : 'Oi! Infelizmente sua inscrição ao programa Embaixadores não foi aceita neste momento :(')
