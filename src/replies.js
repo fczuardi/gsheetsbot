@@ -18,10 +18,10 @@ const token =
     };
 const status =
     { pending: 'Sua inscrição ainda está sendo analizada, aguarde uns dias e verifique novamente usando o commando /status'
-    , approved: 'Parabéns sua inscrição foi aceita! Digite /start para acessar o menu principal'
+    , approved: 'Oi! Boas notícias! Você foi aprovado no Programa de Embaixadores! 😍'
     , unapproved: reason => (reason
-        ? `Sua inscrição não foi aceita, motivo: ${reason}`
-        : 'Sua inscrição não foi aceita.')
+        ? `Oi! Infelizmente sua inscrição ao programa Embaixadores não foi aceita neste momento :( Motivo: ${reason}`
+        : 'Oi! Infelizmente sua inscrição ao programa Embaixadores não foi aceita neste momento :(')
     };
 const signup =
     { formStart: 'Para continuar preciso saber algumas coisas sobre você…'
@@ -32,7 +32,10 @@ const signup =
     , reviewQuestionsFooter: 'Quer editar alguma resposta?'
     , submissionError: 'Ocorreu um erro no envio.'
     , emptyAnswersError: 'Perdi suas respostas, vamos tentar de novo.'
-    , submissionSent: 'Sua inscrição foi enviada! Entraremos em contato. Caso queira acompanhar o estado de sua aplicação, digite /status.'
+    , submissionSent: [ 'Ótimo! Obrigado por responder a estas perguntas! :)'
+        , 'Vamos avaliar a sua inscrição. Se tudo estiver OK você será avisado aqui!'
+        , 'Enquanto isso, que tal visitar a página do YouTube da [Mind Lab](https://www.youtube.com/user/MindLabBrasil) e do [MISSU](https://www.youtube.com/channel/UCXzLrA6KPj_Q1FSLkBO3ghw) para saber mais sobre nossas soluções???'
+        , 'Você pode digitar /status para consultar o status de sua inscrição a qualquer momento também.' ]
     };
 const docs =
     { defaultDescription: 'Escolha uma opção:'

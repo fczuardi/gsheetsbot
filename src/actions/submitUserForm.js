@@ -6,6 +6,7 @@ const auth = require('../oauth');
 const config = require('../config');
 const emptyAnswersReply = require('./emptyAnswersReply');
 const signup = require('../commands/signup');
+const sequenceReply = require('../sequenceReply');
 
 const range = config.sheets.user.answers;
 const valueInputOption = 'USER_ENTERED';
@@ -39,8 +40,10 @@ const writeFormRow = (ctx, next) => {
     ).then(() => {
         ctx.state.submitError = false;
         return ctx.editMessageText(
-            replies.signup.submissionSent
-        ).then(next);
+            replies.signup.submissionSent[0]
+        ).then(() => sequenceReply(ctx,
+            replies.signup.submissionSent.slice(1)
+        )).then(next);
     }).catch(err => {
         console.error(err);
         ctx.state.submitError = true;
