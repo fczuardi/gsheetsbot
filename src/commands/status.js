@@ -9,16 +9,16 @@ const sequenceReply = require('../sequenceReply');
 
 const userStatus = (ctx, next) => {
     if (ctx.state.userStatus === config.sheets.user.deniedValue) {
-        return ctx.reply(
+        return ctx.replyWithMarkdown(
             replies.status.unapproved(ctx.state.statusNote)
         ).then(next);
     }
-    return ctx.reply(replies.status.pending).then(next);
+    return ctx.replyWithMarkdown(replies.status.pending).then(next);
 };
 
 const schoolStatus = (ctx, next) => {
     if (!ctx.state.userHasAppliedSchools) {
-        return ctx.reply(replies.status.approved).then(next);
+        return ctx.replyWithMarkdown(replies.status.approved).then(next);
     }
     const schoolListMarkdown = ctx.state.schoolStatusList.map(
         replies.school.statusLine

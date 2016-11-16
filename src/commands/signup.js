@@ -33,7 +33,7 @@ const nextQuestion = ctx => {
         template(answersObj)
     ).catch(console.error);
     if (userAnswers.length === 0) {
-        return ctx.reply(replies.signup.formStart).then(makeQuestion);
+        return ctx.replyWithMarkdown(replies.signup.formStart).then(makeQuestion);
     }
     return makeQuestion();
 };
@@ -52,7 +52,7 @@ const signupEnd = (ctx, next) => {
         ? replies.signup.retryFormFinished
         : replies.signup.formFinished;
     ctx.session.awaitingInput = null;
-    return ctx.reply(
+    return ctx.replyWithMarkdown(
         replyText, replyOptions
     ).then(next).catch(console.error);
 };

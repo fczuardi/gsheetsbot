@@ -59,7 +59,7 @@ const formEnd = (ctx, next) => {
         ? replies.signup.retryFormFinished
         : replies.signup.formFinished;
     ctx.session.awaitingInput = null;
-    return ctx.reply(
+    return ctx.replyWithMarkdown(
         replyText, replyOptions
     ).then(next).catch(console.error);
 };
