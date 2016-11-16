@@ -11,26 +11,22 @@ const setRootId = (ctx, next) => {
 };
 
 const setCurrentFile = (ctx, next) => {
-    console.log('setCurrentFile');
     const fileId = ctx.match[2];
-    console.log('fileId', fileId, ctx.session.currentFolder);
-    console.log('state folders', ctx.state.folders);
     const currentFolderFiles = ctx.state.folders[ctx.session.currentFolder] || [];
-    console.log('currentFolderFiles', currentFolderFiles);
     const file = currentFolderFiles.filter(f => f.id === fileId);
-    console.log(fileId, file);
     if (!file) {
         console.error('file not found');
         return next();
     }
-    const { mimeType } = file[0];
+    const { mimeType, fileExtension } = file[0];
     const fileType = mimeType.indexOf('video') !== -1 ? 'video' : 'document';
-    const nextState = extend(ctx.state,
-        { currentFile: {
-            fileId
-            , fileType
-        } });
-    console.log('ctx.state ', ctx.state);
+    const currentFile =
+        { fileId
+        , fileType
+        , fileExtension
+        };
+    const nextState = extend(ctx.state, { currentFile });
+    // console.log('ctx.state ', ctx.state);
     ctx.state = nextState;
     return next();
 };

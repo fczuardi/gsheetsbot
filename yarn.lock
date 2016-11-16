@@ -2393,8 +2393,8 @@ telegraf:
     sandwich-stream "^1.0.0"
 
 telegraf-googledrive:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/telegraf-googledrive/-/telegraf-googledrive-0.4.1.tgz#3c17b5bb596515cbe980744acb5aa0b13dd3e0e0"
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/telegraf-googledrive/-/telegraf-googledrive-0.5.0.tgz#9182d0e5ac63a655aa533c4fc7428e05d0a2cf2e"
   dependencies:
     googleapis "^14.1.0"
 
