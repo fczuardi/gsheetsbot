@@ -40,8 +40,7 @@ const statusOrSignup = Telegraf.branch(ctx => ctx.state.userHasApplied,
 );
 
 const command =
-    [ loadSheet(config.sheets.user.status)
-    , userStatusMiddleware
+    [ userStatusMiddleware
     , statusOrSignup
     ];
 

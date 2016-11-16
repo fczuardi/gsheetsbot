@@ -1,4 +1,3 @@
-const loadSheet = require('../middlewares/load');
 const userStatusMiddleware = require('../middlewares/userStatus');
 const config = require('../config');
 const signupCommand = require('./signup');
@@ -21,8 +20,7 @@ const start = Telegraf.branch(ctx => ctx.state.userHasApplied,
 );
 
 const command =
-    [ loadSheet(config.sheets.user.status)
-    , userStatusMiddleware
+    [ userStatusMiddleware
     , start
     ];
 

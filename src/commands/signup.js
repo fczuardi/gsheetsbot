@@ -9,7 +9,6 @@ const config = require('../config');
 const addUserStatus = require('../middlewares/userStatus');
 const loadTable = require('../middlewares/load');
 const loadQuestions = loadTable(config.sheets.user.questions);
-const loadUserStatus = loadTable(config.sheets.user.status);
 
 // helpers
 const sheetName = tgs.getSheetName(config.sheets.user.questions);
@@ -59,7 +58,6 @@ const signupEnd = (ctx, next) => {
 
 const command =
     [ loadQuestions
-    , loadUserStatus
     , addUserStatus
     , Telegraf.branch(isLastAnswer, signupEnd, nextQuestion)
     ];

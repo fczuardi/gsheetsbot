@@ -1,4 +1,6 @@
+const Telegraf = require('telegraf');
 const extend = require('xtend');
+const loadSheet = require('../middlewares/load');
 const tgs = require('telegraf-googlesheets');
 const config = require('../config');
 
@@ -38,5 +40,8 @@ const userStatusMiddleware = (ctx, next) => {
     return next();
 };
 
-module.exports = userStatusMiddleware;
+module.exports = Telegraf.compose(
+    [ loadSheet(config.sheets.user.status)
+    , userStatusMiddleware
+    ]);
 
