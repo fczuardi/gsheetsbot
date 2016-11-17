@@ -76,7 +76,7 @@ const approvedUser = Telegraf.compose(
 
 const action =
     [ answerCallback
-    , Telegraf.branch(ctx => ctx.userIsApproved, approvedUser, unapprovedUser)
+    , Telegraf.branch(ctx => ctx.state.userIsApproved, approvedUser, unapprovedUser)
     ];
 
 module.exports = action;
