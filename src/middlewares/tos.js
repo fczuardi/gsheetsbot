@@ -7,9 +7,10 @@ const sequenceReply = require('../sequenceReply');
 const termsOfService = (ctx, next) => {
     const hasAccepted = ctx.session.acceptedTOS;
     const hasAnswered = hasAccepted !== undefined;
+    const hasApplied = ctx.state.userHasApplied;
 
     // continue if the user have accepted the terms already
-    if (hasAccepted) {
+    if (hasAccepted || hasApplied) {
         return next();
     }
 
