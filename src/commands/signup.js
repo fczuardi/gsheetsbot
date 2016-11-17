@@ -6,7 +6,6 @@ const replies = require('../replies');
 const config = require('../config');
 
 // middlewares
-const addUserStatus = require('../middlewares/userStatus');
 const loadTable = require('../middlewares/load');
 const loadQuestions = loadTable(config.sheets.user.questions);
 
@@ -58,7 +57,6 @@ const signupEnd = (ctx, next) => {
 
 const command =
     [ loadQuestions
-    , addUserStatus
     , Telegraf.branch(isLastAnswer, signupEnd, nextQuestion)
     ];
 

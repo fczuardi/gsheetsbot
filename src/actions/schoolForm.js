@@ -5,6 +5,7 @@ const tgs = require('telegraf-googlesheets');
 const config = require('../config');
 const replies = require('../replies');
 const loadTable = require('../middlewares/load');
+const statusCommand = require('../commands/status');
 
 const questionsRange = config.sheets.school.questions;
 const sheetName = tgs.getSheetName(questionsRange);
@@ -66,10 +67,16 @@ const formEnd = (ctx, next) => {
 
 const isLastAnswer = ctx => getAnswers(ctx).length === getQuestions(ctx).length;
 
+const unapprovedUser = Telegraf.compose(statusCommand);
+
+const approvedUser = Telegraf.compose(
+    [ loadTable(questionsRange)
+    , Telegraf.branch(isLastAnswer, formEnd, nextSchoolQuestion)
+    ]);
+
 const action =
     [ answerCallback
-    , loadTable(questionsRange)
-    , Telegraf.branch(isLastAnswer, formEnd, nextSchoolQuestion)
+    , Telegraf.branch(ctx => ctx.userIsApproved, approvedUser, unapprovedUser)
     ];
 
 module.exports = action;

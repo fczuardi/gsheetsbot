@@ -2,6 +2,7 @@ const Telegraf = require('telegraf');
 const config = require('./config');
 const debugMiddleware = require('./middlewares/debug');
 const logMiddleware = require('telegraf-logfile');
+const userStatusMiddleware = require('./middlewares/userStatus');
 const termsOfService = require('./middlewares/tos');
 const adminMiddleware = require('./middlewares/admin');
 const userMiddleware = require('./middlewares/user');
@@ -20,6 +21,9 @@ bot.use(adminMiddleware);
 // add a displayName property to the state
 // build from first/last/username when available
 bot.use(userMiddleware);
+// userStatus middleware that always checks if the messaging comes
+// from an approved / unapproved / new user
+bot.use(userStatusMiddleware);
 // check if the user has accepted the terms and if not, present it to her
 bot.use(termsOfService);
 // setup all /commandName commands see src/commands/index.js

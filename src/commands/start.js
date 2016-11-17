@@ -1,5 +1,3 @@
-const userStatusMiddleware = require('../middlewares/userStatus');
-const config = require('../config');
 const signupCommand = require('./signup');
 const statusCommand = require('./status');
 const filesCommand = require('./files');
@@ -20,8 +18,7 @@ const start = Telegraf.branch(ctx => ctx.state.userHasApplied,
 );
 
 const command =
-    [ userStatusMiddleware
-    , start
+    [ start
     ];
 
 module.exports = command;
