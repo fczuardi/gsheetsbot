@@ -6,6 +6,7 @@ const userStatusMiddleware = require('./middlewares/userStatus');
 const termsOfService = require('./middlewares/tos');
 const adminMiddleware = require('./middlewares/admin');
 const userMiddleware = require('./middlewares/user');
+const signupCommand = require('./commands/signup');
 const commands = require('./commands');
 const actions = require('./actions');
 
@@ -50,7 +51,7 @@ bot.on('text', (ctx, next) => {
         switch (awaitingInput) {
         case 'signup':
             ctx.session.answers.push(text);
-            return Telegraf.compose(commands.signup)(ctx, next);
+            return Telegraf.compose(signupCommand)(ctx, next);
         case 'schoolForm':
             ctx.session.schoolAnswers.push(text);
             return Telegraf.compose(actions.schoolForm)(ctx, next);
