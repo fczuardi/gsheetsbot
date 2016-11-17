@@ -39,6 +39,7 @@ const writeFormRow = (ctx, next) => {
         extend(params, { resource })
     ).then(() => {
         ctx.state.submitError = false;
+        ctx.session.answers = [];
         return ctx.editMessageText(
             replies.signup.submissionSent[0]
         ).then(() => sequenceReply(ctx,
