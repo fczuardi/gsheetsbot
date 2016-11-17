@@ -1,9 +1,8 @@
 const Telegraf = require('telegraf');
-const extend = require('xtend');
-const Handlebars = require('handlebars');
 const tgs = require('telegraf-googlesheets');
 const replies = require('../replies');
 const config = require('../config');
+const { makeQuestion } = require('../formQuestion.js');
 
 // middlewares
 const loadTable = require('../middlewares/load');
@@ -14,26 +13,19 @@ const sheetName = tgs.getSheetName(config.sheets.user.questions);
 const getQuestions = ctx => ctx.state.sheets[sheetName];
 const getAnswers = ctx => ctx.session.answers || [];
 const isLastAnswer = ctx => getAnswers(ctx).length === getQuestions(ctx).length;
-const firstName = name => (name ? name.split(' ')[0] : '');
-Handlebars.registerHelper('firstName', firstName);
 
 const nextQuestion = ctx => {
     const questions = getQuestions(ctx);
     const userAnswers = getAnswers(ctx);
-    const template = Handlebars.compile(questions[userAnswers.length][2]);
-    const answersObj = userAnswers.reduce((prev, answer, index) => {
-        const varName = questions[index][0];
-        return extend(prev, { [varName]: answer });
-    }, {});
+    console.log({ userAnswers });
     ctx.session.awaitingInput = 'signup';
     ctx.session.answers = userAnswers;
-    const makeQuestion = () => ctx.replyWithMarkdown(
-        template(answersObj)
-    ).catch(console.error);
     if (userAnswers.length === 0) {
-        return ctx.replyWithMarkdown(replies.signup.formStart).then(makeQuestion);
+        return ctx.replyWithMarkdown(replies.signup.formStart)
+            .then(() => makeQuestion(ctx, questions, userAnswers))
+            .catch(console.error);
     }
-    return makeQuestion();
+    return makeQuestion(ctx, questions, userAnswers).catch(console.error);
 };
 
 const signupEnd = (ctx, next) => {

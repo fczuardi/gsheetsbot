@@ -1,11 +1,10 @@
 const Telegraf = require('telegraf');
-const Handlebars = require('handlebars');
-const extend = require('xtend');
 const tgs = require('telegraf-googlesheets');
 const config = require('../config');
 const replies = require('../replies');
 const loadTable = require('../middlewares/load');
 const statusCommand = require('../commands/status');
+const { makeQuestion } = require('../formQuestion.js');
 
 const questionsRange = config.sheets.school.questions;
 const sheetName = tgs.getSheetName(questionsRange);
@@ -17,33 +16,13 @@ const answerCallback = (ctx, next) => (ctx.updateType === 'callback_query'
     : next()
 );
 
-const nextSchoolQuestion = (ctx, next) => {
+const nextSchoolQuestion = ctx => {
     console.log('- - - schoolForm - - - -');
     const questions = getQuestions(ctx);
     const answers = getAnswers(ctx);
-    const currentQuestion = questions[answers.length];
-    const questionOptionsString = currentQuestion[3] || '';
-    const questionOptions = questionOptionsString.indexOf('|') !== -1
-        ? questionOptionsString.split('|')
-        : [];
-    const template = Handlebars.compile(currentQuestion[2]);
-    const answersObj = answers.reduce((prev, answer, index) =>
-        extend(prev, { [questions[index][0]]: answer })
-    , {});
-    console.log('questionOptionsString', questionOptionsString, questionOptions);
-    const makeQuestion = () => {
-        const keyboard = questionOptions.map(text => ({ text }));
-        const replyMarkup =
-            { keyboard: [ keyboard ]
-            , one_time_keyboard: true
-            };
-        const options = { reply_markup: replyMarkup };
-        const replyKeyboard = keyboard.length ? options : null;
-        return ctx.replyWithMarkdown(template(answersObj), replyKeyboard);
-    };
     ctx.session.awaitingInput = 'schoolForm';
     ctx.session.schoolAnswers = answers;
-    return makeQuestion().then(next).catch(console.error);
+    return makeQuestion(ctx, questions, answers).catch(console.error);
 };
 
 const formEnd = (ctx, next) => {
