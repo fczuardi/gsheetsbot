@@ -27,6 +27,9 @@ const createCron = (bot, refreshTime) => setInterval(() => {
             return console.error(err);
         }
         const rows = response.values;
+        if (!rows) {
+            return null;
+        }
         const { statusNotificationColumn
             , statusUserId
             , statusColumn
