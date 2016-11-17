@@ -39,6 +39,9 @@ const createCron = (bot, refreshTime) => setInterval(() => {
             [ approvedValue, deniedValue ].includes(row[statusColumn])
         ));
         const newRows = rows.map(row => {
+            if (! [ approvedValue, deniedValue ].includes(row[statusColumn])){
+                return row;
+            }
             row[statusNotificationColumn] = config.sheets.user.notifiedValue;
             // see http://www.2ality.com/2012/06/dense-arrays.html
             return Array.apply(null, row).map(c =>
