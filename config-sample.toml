@@ -32,6 +32,10 @@ scopes = [
     "https://www.googleapis.com/auth/drive.readonly"
 ]
 
+[cron]
+# time in minutes between cronjob run
+interval = 5
+
 [sheets]
 # the share url of a google sheet
 url = ""
@@ -48,8 +52,8 @@ questions = "Questions User!A2:D"
 answers = "Answers Users!A2:L"
 
 # what range to look for user application status
-# this should be 3 columns: status, notes and userId
-status = "Answers Users!L2:N"
+# this should be 4 columns: status, notes, userId and notifiedFlag
+status = "Answers Users!L2:O"
 
 # Which columns to look for the userId and approved state.
 # Example: if the status column is the first of the range, the value is 0
@@ -57,10 +61,12 @@ status = "Answers Users!L2:N"
 statusUserId = 0
 statusColumn = 1
 statusNotesColumn = 2
+statusNotificationColumn = 3
 
 # The value in the status column to consider an user approved
 approvedValue = "Approved"
 deniedValue = "Denied"
+notifiedValue = "Yes"
 
 [sheets.school]
 questions = "Questions School!A2:D11"
