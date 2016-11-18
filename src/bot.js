@@ -68,12 +68,11 @@ bot.on('text', (ctx, next) => {
     }
     return next();
 });
-
 // TODO get webhooks to work on heroku
 bot.telegram.removeWebHook().then(() => {
     bot.startPolling();
     console.log('Bot started in polling mode');
     // start cron job
     createCron(bot, config.cron.interval * 60 * 1000);
-});
+}).catch(console.error);
 
