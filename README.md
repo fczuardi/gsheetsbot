@@ -97,6 +97,26 @@ git checkout master
 git checkout secret-branch config.toml
 ```
 
+Logging
+-------
+
+All Telegram updates are logged in the filesystem on a log file configured
+in the ```[log]``` section of the ```config.toml``` file. To download this file
+any admin of the bot can use the ```/logs``` command.
+
+But if your bot is deployed to an environment with non-persistent filesystem, 
+such as Heroku, then the logfile sent to the admin with the /logs command will
+contain just the updates after the last reboot.
+
+For that case, it is recommended to install a 
+[heroku logging addon][loggingaddons], such as [Papertrail][papertrail] to 
+have a more complete logging management. All telegram updates JSON data are
+logged in the standard output (look for ```[DEBUG]``` or ```{"update_id"```)
+so it should be simple to catch them using this service.
+
+[loggingaddons]: https://elements.heroku.com/addons/#logging
+[papertrail]: https://elements.heroku.com/addons/papertrail 
+
 Dependencies
 ------------
 
