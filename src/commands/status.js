@@ -1,13 +1,47 @@
 const Telegraf = require('telegraf');
+const tgs = require('telegraf-googlesheets');
 const loadSheet = require('../middlewares/load');
 const schoolStatusMiddleware = require('../middlewares/schoolStatus');
 const signupCommand = require('./signup');
 const config = require('../config');
 const replies = require('../replies');
 const sequenceReply = require('../sequenceReply');
+const { updateRows } = require('../cron');
+
+// write "Yes" on the notification column to prevent
+// cron sending this same message again
+const flagUserAsNotified = ctx => {
+    const userId = `${ctx.from.id}`;
+    console.log('TBD update status sheet on the row of user', userId);
+    const sheetName = tgs.getSheetName(config.sheets.user.status);
+    const sheetData = ctx.state.sheets[sheetName] || [];
+    console.log({ sheetData });
+    const { statusUserId
+        , statusColumn
+        , approvedValue
+        , deniedValue
+        , statusNotificationColumn
+        , notifiedValue
+    } = config.sheets.user;
+    const newRows = sheetData.map(row => {
+        console.log('__:: ', userId, row[statusUserId]);
+        if (
+            row[statusUserId] !== userId ||
+            (row[statusColumn] !== approvedValue && row[statusColumn] !== deniedValue)
+        ) {
+            return row;
+        }
+        row[statusNotificationColumn] = notifiedValue;
+        console.log({ row });
+        return Array.apply(null, row).map(c => (c === undefined ? '' : c));
+    });
+    console.log({ newRows });
+    return updateRows(newRows);
+};
 
 const userStatus = (ctx, next) => {
     if (ctx.state.userStatus === config.sheets.user.deniedValue) {
+        flagUserAsNotified(ctx);
         return ctx.replyWithMarkdown(
             replies.status.unapproved(ctx.state.statusNote)
         ).then(next);
@@ -17,6 +51,7 @@ const userStatus = (ctx, next) => {
 
 const schoolStatus = (ctx, next) => {
     if (!ctx.state.userHasAppliedSchools) {
+        flagUserAsNotified(ctx);
         return ctx.replyWithMarkdown(replies.status.approved).then(next);
     }
     const schoolListMarkdown = ctx.state.schoolStatusList.map(

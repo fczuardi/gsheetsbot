@@ -9,7 +9,7 @@ const userMiddleware = require('./middlewares/user');
 const signupCommand = require('./commands/signup');
 const commands = require('./commands');
 const actions = require('./actions');
-const createCron = require('./cron');
+const { createCron } = require('./cron');
 
 const bot = new Telegraf(config.telegram.token);
 // session in memory (ctx.session)

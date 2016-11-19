@@ -17,6 +17,18 @@ const params =
 
 const telegram = new Telegram(config.telegram.token);
 
+const updateRows = newRows => {
+    const resource = { values: newRows };
+    const updateParams = extend(params, { resource, valueInputOption: 'USER_ENTERED' });
+    return gsheets.spreadsheets.values.update(updateParams, (updateErr, updateRes) => {
+        if (updateErr) {
+            return console.error(updateErr);
+        }
+        console.log({ updateRes });
+        return updateRes;
+    });
+};
+
 // cron job that will check a spreadsheet looking for approved and unnotified
 // users, if there are any, notify all of them that they where approved and
 // update the sheet by adding a character in a column flagging this
@@ -63,20 +75,9 @@ const createCron = (bot, refreshTime) => setInterval(() => {
                 : replies.status.unapproved(row[statusNotesColumn])
             return telegram.sendMessage(row[statusUserId]
                 , messageText
-                , { parse_mode: 'Markdown' });
-        })).then(messages => {
-            console.log('messages delivered');
-            const resource = { values: newRows };
-            const updateParams = extend(params, { resource, valueInputOption: 'USER_ENTERED' });
-            return gsheets.spreadsheets.values.update(updateParams, (updateErr, updateRes) => {
-                if (updateErr) {
-                    return console.error(updateErr);
-                }
-                console.log({ updateRes });
-                return updateRes;
-            });
-        });
+                , { parse_mode: 'Markdown' }).catch(console.error);
+        })).then(messages => updateRows(newRows));
     });
 }, refreshTime);
 
-module.exports = createCron;
+module.exports = { createCron, updateRows };
