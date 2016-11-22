@@ -1,4 +1,8 @@
 const sequenceReply = (ctx, msgs, index = 0) => {
+    const text = msgs[index];
+    if (!text) {
+        return new Promise(resolve => resolve());
+    }
     const replyPromise = ctx.replyWithMarkdown(
         msgs[index],
         { disable_web_page_preview: true }

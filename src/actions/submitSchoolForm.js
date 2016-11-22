@@ -49,10 +49,13 @@ const writeFormRow = (ctx, next) => {
     ).then(() => {
         ctx.state.submitError = false;
         ctx.session.schoolAnswers = [];
+        if (submissionSentReplies.length === 1) {
+            return lastReply();
+        }
         return ctx.editMessageText(
-            replies.school.submissionSent[0]
+            submissionSentReplies[0]
         ).then(() => sequenceReply(ctx,
-            replies.school.submissionSent.slice(1, -1)
+            submissionSentReplies.slice(1, -1)
         )).then(lastReply);
     }).catch(err => {
         console.error(err);

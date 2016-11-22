@@ -24,7 +24,8 @@ const changeFolder = (ctx, next) => {
         , callback_data: `changeFolder ${parentFolder}`
         }
     ] ];
-    ctx.state.defaultKeyboard = extraButtons.concat(backButton);
+    const defaultKeyboard = extraButtons.concat(backButton);
+    ctx.state.defaultKeyboard = defaultKeyboard;
     return next();
 };
 

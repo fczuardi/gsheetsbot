@@ -45,12 +45,12 @@ const makeKeyboard = (ctx, next) => {
     console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
     const inlineKeyboard = filesKeyboard.concat(ctx.state.defaultKeyboard || []);
     const keyboard = useCustomKeyboard
-        ? { keyboard: inlineKeyboard }
+        ? { keyboard: inlineKeyboard.map(row => row.map(
+            button => ({ text: button.text }))) }
         : { inline_keyboard: inlineKeyboard };
     if (useCustomKeyboard) {
         console.log('customKeyboard', JSON.stringify(inlineKeyboard));
         const textCommands = inlineKeyboard.reduce((prev, buttonRow) => {
-            console.log({ buttonRow });
             if (!buttonRow.length) {
                 return extend({}, prev);
             }

@@ -97,6 +97,11 @@ id = ""
 text = "Indicar"
 callbackData = "schoolForm"
 
+[[drive.subFolderExtraButtons]]
+id = ""
+text = "Escolas Indicadas"
+callbackData = "status"
+
 # Those are the parameters used when making the request to google drive's
 # API service
 [drive.fields]

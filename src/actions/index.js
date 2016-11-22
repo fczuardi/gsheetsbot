@@ -8,6 +8,7 @@ const reviewSchoolForm = require('./reviewSchoolForm');
 const sendFile = require('./sendFile');
 const changeFolder = require('./changeFolder');
 const schoolForm = require('./schoolForm');
+const status = require('../commands/status');
 
 const actions =
     { submitUserForm
@@ -20,6 +21,7 @@ const actions =
     , changeSchoolAnswer
     , editSchoolAnswer
     , schoolForm
+    , status
     };
 
 module.exports = actions;
