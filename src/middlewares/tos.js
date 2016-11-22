@@ -21,7 +21,7 @@ const termsOfService = (ctx, next) => {
 
     // start flow if the user just accepted
     if (hasJustAccepted) {
-        const hideKeyboard = { reply_markup: { hide_keyboard: true } };
+        const hideKeyboard = { reply_markup: { remove_keyboard: true } };
         return ctx.replyWithMarkdown(replies.tos.accepted, hideKeyboard).then(() =>
             Telegraf.compose(startCommand)(ctx, next)
         );
