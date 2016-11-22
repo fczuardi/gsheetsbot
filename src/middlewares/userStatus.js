@@ -18,7 +18,7 @@ const userStatusMiddleware = (ctx, next) => {
         row => row[userIdColumn] === userId
     );
     const userHasApplied = rowWithUserId !== undefined;
-    console.log('rowWithUserId', rowWithUserId);
+    // console.log('rowWithUserId', rowWithUserId);
     const userStatus = rowWithUserId
         ? rowWithUserId[userStatusColumn]
         : null;
@@ -35,7 +35,7 @@ const userStatusMiddleware = (ctx, next) => {
         };
 
     const nextState = extend(ctx.state, newProperties);
-    console.log('userStatus', newProperties);
+    // console.log('userStatus', newProperties);
     ctx.state = nextState;
     return next();
 };

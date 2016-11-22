@@ -33,9 +33,9 @@ const updateRows = newRows => {
 // users, if there are any, notify all of them that they where approved and
 // update the sheet by adding a character in a column flagging this
 const createCron = (bot, refreshTime) => setInterval(() => {
-    console.log('running cron job...');
     return gsheets.spreadsheets.values.get(params, (err, response) => {
         if (err) {
+            console.log('cron job fetch error');
             return console.error(err);
         }
         const rows = response.values;
@@ -63,12 +63,11 @@ const createCron = (bot, refreshTime) => setInterval(() => {
                 (c === undefined ? '' : c)
             );
         });
-        // console.log({ rows });
-        console.log({ usersToNotify });
-        // console.log({ newRows });
         if (!usersToNotify.length) {
             return null;
         }
+        console.log('cron has users to notify');
+        console.log({ usersToNotify });
         return Promise.all(usersToNotify.map(row => {
             const messageText = row[statusColumn] === approvedValue
                 ? replies.status.approved

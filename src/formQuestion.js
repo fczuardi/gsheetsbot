@@ -4,8 +4,17 @@ const Handlebars = require('handlebars');
 const firstName = name => (name ? name.split(' ')[0] : '');
 Handlebars.registerHelper('firstName', firstName);
 
-const makeKeyboard = (currentQuestion, callbackData) => {
+const makeKeyboard = (currentQuestion, callbackData, isInline) => {
     const questionOptionsString = currentQuestion[3] || '';
+    if (!isInline) {
+        const specialButtonTypes =
+            [ 'request_location'
+            , 'request_contact'
+            ];
+        if (specialButtonTypes.includes(questionOptionsString)) {
+            return [ { text: currentQuestion[1], [questionOptionsString]: true } ];
+        }
+    }
     const questionOptions = questionOptionsString.indexOf('|') !== -1
         ? questionOptionsString.split('|')
         : [];
@@ -18,8 +27,6 @@ const makeKeyboard = (currentQuestion, callbackData) => {
 };
 
 const makeQuestion = (ctx, questions, answers) => {
-    console.log('makeQuestion');
-    console.log({ answers });
     const currentQuestion = questions[answers.length];
     const template = Handlebars.compile(currentQuestion[2]);
     const answersObj = answers.reduce((prev, answer, index) =>
@@ -36,7 +43,7 @@ const makeQuestion = (ctx, questions, answers) => {
 };
 
 const makeEditAnswerQuestion = (ctx, currentQuestion, callbackData) => {
-    const keyboard = makeKeyboard(currentQuestion, callbackData);
+    const keyboard = makeKeyboard(currentQuestion, callbackData, true);
     const replyMarkup =
         { inline_keyboard: [ keyboard ]
         };

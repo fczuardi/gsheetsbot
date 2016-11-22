@@ -38,12 +38,9 @@ Object.keys(actions).forEach(name => {
 });
 // text input handler
 // used mostly to fill forms
-bot.on('text', (ctx, next) => {
-    const { update, updateType } = ctx;
-    if (updateType !== 'message') {
-        return next();
-    }
-    const { text, entities } = update.message;
+bot.on('message', (ctx, next) => {
+    const { update } = ctx;
+    const { text, entities, contact, location } = update.message;
     if (entities && entities[0].type === 'bot_command') {
         return next();
     }
@@ -51,27 +48,24 @@ bot.on('text', (ctx, next) => {
         , awaitingInput
         , answerToEdit
     } = ctx.session;
-    // console.log('text typed:', Object.keys(textCommands), text);
     if (textCommands && Object.keys(textCommands).includes(text)) {
-        console.log('--TEXT COMMAND');
-        console.log({ text });
-        console.log({ textCommands });
         const callbackData = textCommands[text];
         const callbackPattern = new RegExp('([^ ]*) *(.*)');
         const matches = callbackData.match(callbackPattern);
         const actionName = matches[1];
-        console.log({ matches });
-        console.log({ actionName });
         ctx.match = matches;
         return Telegraf.compose(actions[actionName])(ctx, next);
     }
     if (awaitingInput) {
+        const phoneNumber = contact ? contact.phone_number : null;
+        const latLon = location ? JSON.stringify(location) : null;
+        const answerText = text || phoneNumber || latLon;
         switch (awaitingInput) {
         case 'signup':
-            ctx.session.answers.push(text);
+            ctx.session.answers.push(answerText);
             return Telegraf.compose(signupCommand)(ctx, next);
         case 'schoolForm':
-            ctx.session.schoolAnswers.push(text);
+            ctx.session.schoolAnswers.push(answerText);
             return Telegraf.compose(actions.schoolForm)(ctx, next);
         case 'editUserAnswer':
             ctx.session.answers[answerToEdit] = text;
