@@ -87,6 +87,10 @@ rootId = ""
 # inline keyboard
 useCustomKeyboard = true
 
+# When pressing the back button, display only the parent folder title
+# instead of the whole README
+parentMenuTitleOnly = true
+
 # path variable used inside program to save temp data.
 # don't forget to create this folder
 tempFolder = "./tmp"

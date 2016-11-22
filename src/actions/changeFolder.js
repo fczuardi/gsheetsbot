@@ -21,7 +21,7 @@ const changeFolder = (ctx, next) => {
     });
     const backButton = !parentFolder ? [] : [ [
         { text: 'Voltar'
-        , callback_data: `changeFolder ${parentFolder}`
+        , callback_data: `changeFolderUp ${parentFolder}`
         }
     ] ];
     const defaultKeyboard = extraButtons.concat(backButton);

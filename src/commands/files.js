@@ -10,6 +10,9 @@ const replyTextMaxLength = 309;
 
 const { rootId, fields } = config.drive;
 
+// TODO bad function name
+// this function does a lot more than just creating a keyboard
+// it also replies the whole description to the user
 const makeKeyboard = (ctx, next) => {
     // console.log('state folders', JSON.stringify(ctx.state.folders, ' ', 2));
     if (!ctx.state.folders) {
@@ -66,11 +69,14 @@ const makeKeyboard = (ctx, next) => {
     const paragraphs = folderDescription.split('\n')
             .filter(line => line.trim().length > 0)
             .map(line => line.slice(0, replyTextMaxLength));
+    const justTitle = config.drive.parentMenuTitleOnly && ctx.state.navigatingUp;
+    const lastParagraphIndex = justTitle ? 0 : paragraphs.length - 1;
     const lastReply = () => ctx.replyWithMarkdown(
-        paragraphs[paragraphs.length - 1], replyOptions
+        paragraphs[lastParagraphIndex], replyOptions
     ).then(next).catch(console.error);
     if (paragraphs.length) {
-        return sequenceReply(ctx, paragraphs.slice(0, -1)).then(lastReply);
+        return sequenceReply(ctx, paragraphs.slice(0, lastParagraphIndex))
+            .then(lastReply);
     }
     return lastReply();
 };
