@@ -28,10 +28,10 @@ const makeQuestion = (ctx, questions, answers) => {
     const keyboard = makeKeyboard(currentQuestion);
     const replyMarkup =
         { keyboard: [ keyboard ]
-        , one_time_keyboard: true
         };
     const options = { reply_markup: replyMarkup };
-    const replyKeyboard = keyboard.length ? options : null;
+    const removeKeyboard = { reply_markup: { remove_keyboard: true } };
+    const replyKeyboard = keyboard.length ? options : removeKeyboard;
     return ctx.replyWithMarkdown(template(answersObj), replyKeyboard);
 };
 
