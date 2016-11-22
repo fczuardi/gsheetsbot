@@ -36,6 +36,14 @@ const writeFormRow = (ctx, next) => {
             ] ]
         , range
         };
+
+    const menu = ctx.session.lastMenu;
+    const submissionSentReplies = replies.school.submissionSent;
+    const lastReply = !menu ? next : () => ctx.replyWithMarkdown(
+        submissionSentReplies[submissionSentReplies.length - 1],
+        { reply_markup: { keyboard: menu }, disable_web_page_preview: true }
+    );
+
     return tgs.appendRow(
         extend(params, { resource })
     ).then(() => {
@@ -44,8 +52,8 @@ const writeFormRow = (ctx, next) => {
         return ctx.editMessageText(
             replies.school.submissionSent[0]
         ).then(() => sequenceReply(ctx,
-            replies.school.submissionSent.slice(1)
-        )).then(next);
+            replies.school.submissionSent.slice(1, -1)
+        )).then(lastReply);
     }).catch(err => {
         console.error(err);
         ctx.state.submitError = true;

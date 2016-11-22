@@ -8,7 +8,7 @@ const changeFolder = (ctx, next) => {
     const rootId = ctx.match[2];
     const parentFolder = ctx.session.parents[rootId];
     const customSubfolders = config.drive.subFolderExtraButtons;
-    const customization = customSubfolders.filter(folder => folder.id === rootId)
+    const customization = customSubfolders.filter(folder => folder.id === rootId);
     console.log('--- - - changeFolder -- ', customSubfolders, customization);
     ctx.state.rootId = rootId;
     ctx.session.currentFolder = rootId;

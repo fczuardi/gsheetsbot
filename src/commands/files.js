@@ -16,7 +16,9 @@ const makeKeyboard = (ctx, next) => {
         console.error('folder no longer on state');
         return next();
     }
-    const folders = ctx.state.folders[ctx.state.rootId || rootId];
+    const currentFolderId = ctx.state.rootId || rootId;
+    const useCustomKeyboard = config.drive.useCustomKeyboard;
+    const folders = ctx.state.folders[currentFolderId];
     const filesKeyboard = folders.map(file => {
         const isSubFolder = (file.mimeType === 'application/vnd.google-apps.folder');
         const isReadme = file.name.toLowerCase() === 'readme.md';
@@ -42,9 +44,23 @@ const makeKeyboard = (ctx, next) => {
 
     console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
     const inlineKeyboard = filesKeyboard.concat(ctx.state.defaultKeyboard || []);
-
-    const replyOptions = { reply_markup: { inline_keyboard: inlineKeyboard }
-        , disable_web_page_preview: true };
+    const keyboard = useCustomKeyboard
+        ? { keyboard: inlineKeyboard }
+        : { inline_keyboard: inlineKeyboard };
+    if (useCustomKeyboard) {
+        console.log('customKeyboard', JSON.stringify(inlineKeyboard));
+        const textCommands = inlineKeyboard.reduce((prev, buttonRow) => {
+            console.log({ buttonRow });
+            if (!buttonRow.length) {
+                return extend({}, prev);
+            }
+            const button = buttonRow[0];
+            return extend({}, prev, { [button.text]: button.callback_data });
+        }, {});
+        ctx.session.textCommands = textCommands;
+        ctx.session.lastMenu = inlineKeyboard;
+    }
+    const replyOptions = { reply_markup: keyboard, disable_web_page_preview: true };
     const folderDescription = ctx.state.folders.description
         || replies.docs.defaultDescription || '';
     const paragraphs = folderDescription.split('\n')

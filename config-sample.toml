@@ -83,6 +83,10 @@ answers = "Answers School!A2:N2"
 # ie:. https://drive.google.com/drive/some_path/{{rootId}}
 rootId = ""
 
+# If the folder menus should be presented as a custom keyboard instead of
+# inline keyboard
+useCustomKeyboard = true
+
 # path variable used inside program to save temp data.
 # don't forget to create this folder
 tempFolder = "./tmp"

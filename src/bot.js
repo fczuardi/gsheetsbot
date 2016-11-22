@@ -47,26 +47,45 @@ bot.on('text', (ctx, next) => {
     if (entities && entities[0].type === 'bot_command') {
         return next();
     }
-    const awaitingInput = ctx.session.awaitingInput;
+    const { textCommands
+        , awaitingInput
+        , answers
+        , schoolAnswers
+        , answerToEdit
+    } = ctx.session;
+    // console.log('text typed:', Object.keys(textCommands), text);
+    if (textCommands && Object.keys(textCommands).includes(text)) {
+        console.log('--TEXT COMMAND');
+        console.log({ text });
+        console.log({ textCommands });
+        const callbackData = textCommands[text];
+        const callbackPattern = new RegExp('([^ ]*) *(.*)');
+        const matches = callbackData.match(callbackPattern);
+        const actionName = matches[1];
+        console.log({ matches });
+        console.log({ actionName });
+        ctx.match = matches;
+        return Telegraf.compose(actions[actionName])(ctx, next);
+    }
     if (awaitingInput) {
         switch (awaitingInput) {
         case 'signup':
-            ctx.session.answers.push(text);
+            answers.push(text);
             return Telegraf.compose(signupCommand)(ctx, next);
         case 'schoolForm':
-            ctx.session.schoolAnswers.push(text);
+            schoolAnswers.push(text);
             return Telegraf.compose(actions.schoolForm)(ctx, next);
         case 'editAnswer':
-            ctx.session.answers[ctx.session.answerToEdit] = text;
+            answers[answerToEdit] = text;
             return Telegraf.compose(actions.reviewUserForm)(ctx, next);
         case 'editSchoolAnswer':
-            ctx.session.schoolAnswers[ctx.session.answerToEdit] = text;
+            schoolAnswers[answerToEdit] = text;
             return Telegraf.compose(actions.reviewSchoolForm)(ctx, next);
         default:
             return next();
         }
     }
-    return next();
+    return Telegraf.compose(commands.start)(ctx, next);
 });
 // TODO get webhooks to work on heroku
 bot.telegram.removeWebHook().then(() => {
