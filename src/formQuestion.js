@@ -50,9 +50,23 @@ const makeEditAnswerQuestion = (ctx, currentQuestion, callbackData) => {
     );
 };
 
+const makeEditAnswerAction = (callbackData, awaitingInput) => (ctx, next) => {
+    const answerIndex = parseInt(ctx.match[2], 10);
+    if (!ctx.session.questions || !ctx.session.questions[answerIndex]) {
+        console.error('session questions lost');
+        return next();
+    }
+    const currentQuestion = ctx.session.questions[answerIndex];
+    ctx.session.answerToEdit = answerIndex;
+    ctx.session.awaitingInput = awaitingInput;
+    return makeEditAnswerQuestion(ctx, currentQuestion, callbackData)
+        .then(next).catch(console.error);
+};
+
 const lib =
     { makeQuestion
     , makeEditAnswerQuestion
+    , makeEditAnswerAction
     };
 
 module.exports = lib;

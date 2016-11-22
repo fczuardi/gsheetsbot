@@ -49,8 +49,6 @@ bot.on('text', (ctx, next) => {
     }
     const { textCommands
         , awaitingInput
-        , answers
-        , schoolAnswers
         , answerToEdit
     } = ctx.session;
     // console.log('text typed:', Object.keys(textCommands), text);
@@ -70,16 +68,16 @@ bot.on('text', (ctx, next) => {
     if (awaitingInput) {
         switch (awaitingInput) {
         case 'signup':
-            answers.push(text);
+            ctx.session.answers.push(text);
             return Telegraf.compose(signupCommand)(ctx, next);
         case 'schoolForm':
-            schoolAnswers.push(text);
+            ctx.session.schoolAnswers.push(text);
             return Telegraf.compose(actions.schoolForm)(ctx, next);
-        case 'editAnswer':
-            answers[answerToEdit] = text;
+        case 'editUserAnswer':
+            ctx.session.answers[answerToEdit] = text;
             return Telegraf.compose(actions.reviewUserForm)(ctx, next);
         case 'editSchoolAnswer':
-            schoolAnswers[answerToEdit] = text;
+            ctx.session.schoolAnswers[answerToEdit] = text;
             return Telegraf.compose(actions.reviewSchoolForm)(ctx, next);
         default:
             return next();

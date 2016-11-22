@@ -4,8 +4,8 @@ const answerCallback = (ctx, next) => (ctx.updateType === 'callback_query'
     : next()
 );
 
-const callbackData = 'changeSchoolAnswer';
-const awaitingInput = 'editSchoolAnswer';
+const callbackData = 'changeUserAnswer';
+const awaitingInput = 'editUserAnswer';
 const editAnswer = makeEditAnswerAction(callbackData, awaitingInput);
 
 module.exports = [ editAnswer, answerCallback ];

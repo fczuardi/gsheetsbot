@@ -1,6 +1,7 @@
-const editAnswer = require('./editAnswer');
-const changeSchoolAnswer = require('./changeSchoolAnswer');
+const editUserAnswer = require('./editUserAnswer');
 const editSchoolAnswer = require('./editSchoolAnswer');
+const changeUserAnswer = require('./changeUserAnswer');
+const changeSchoolAnswer = require('./changeSchoolAnswer');
 const submitUserForm = require('./submitUserForm');
 const submitSchoolForm = require('./submitSchoolForm');
 const reviewUserForm = require('./reviewUserForm');
@@ -17,9 +18,10 @@ const actions =
     , reviewSchoolForm
     , sendFile
     , changeFolder
-    , editAnswer
-    , changeSchoolAnswer
+    , editUserAnswer
     , editSchoolAnswer
+    , changeUserAnswer
+    , changeSchoolAnswer
     , schoolForm
     , status
     };

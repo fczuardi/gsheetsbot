@@ -28,7 +28,7 @@ const chooseAnswer = (ctx, next) => {
     const editAnswerButtons = answers.reduce((prev, answer, index) => {
         const button =
             { text: `${index + 1}`
-            , callback_data: `editAnswer ${index}`
+            , callback_data: `editUserAnswer ${index}`
             };
         const row = Math.floor(index / buttonColumns);
         const oldRow = prev[row] || [];
