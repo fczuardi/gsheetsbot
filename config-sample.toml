@@ -5,6 +5,13 @@ url = "http://www.example.com/tos"
 token = ""
 username = ""
 admins = ["fczuardi"]
+# Telegram group (chat_id) for broadcasters. Any member of this group can use
+# the /broadcast command to send SPAM
+broadcastGroup = ""
+# Telegram group (chat_id) for support. All contact messages are forwarded to
+# this group and all individual message reply is forwarded back to the user
+# who wrote that individual contact message
+supportGroup = ""
 
 [api]
 port = 58337
