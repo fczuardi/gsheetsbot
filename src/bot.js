@@ -69,6 +69,7 @@ bot.on('message', (ctx, next) => {
             return Telegraf.compose(actions.schoolForm)(ctx, next);
         case 'editUserAnswer':
             ctx.session.answers[answerToEdit] = text;
+            ctx.session.awaitingInput = null;
             return Telegraf.compose(actions.reviewUserForm)(ctx, next);
         case 'editSchoolAnswer':
             ctx.session.schoolAnswers[answerToEdit] = text;
