@@ -5,6 +5,7 @@ const replies = require('../replies');
 const config = require('../config');
 const oauthClient = require('../oauth');
 const sequenceReply = require('../sequenceReply');
+const statusCommand = require('../commands/status');
 
 const replyTextMaxLength = 309;
 
@@ -106,12 +107,15 @@ const callbackEnd = (ctx, next) => {
     );
 };
 
-const command =
+const approvedUser = Telegraf.compose(
     [ filesToState
     , setDescription
     , callbackEnd
     , makeKeyboard
-    ];
+    ]);
 
-module.exports = command;
+const unapprovedUser = Telegraf.compose(statusCommand);
+
+const command = Telegraf.branch(ctx => ctx.state.userIsApproved, approvedUser, unapprovedUser);
+module.exports = [ command ];
 

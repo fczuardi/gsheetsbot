@@ -42,8 +42,9 @@ const flagUserAsNotified = ctx => {
 const userStatus = (ctx, next) => {
     if (ctx.state.userStatus === config.sheets.user.deniedValue) {
         flagUserAsNotified(ctx);
+        const removeKeyboard = { reply_markup: { remove_keyboard: true } };
         return ctx.replyWithMarkdown(
-            replies.status.unapproved(ctx.state.statusNote)
+            replies.status.unapproved(ctx.state.statusNote), removeKeyboard
         ).then(next);
     }
     return ctx.replyWithMarkdown(replies.status.pending).then(next);
