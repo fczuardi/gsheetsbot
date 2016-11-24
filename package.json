@@ -28,7 +28,7 @@
     "express": "^4.14.0",
     "googleapis": "^14.1.0",
     "handlebars": "^4.0.5",
-    "telegraf": "^3.3.0",
+    "telegraf": "^3.5.2",
     "telegraf-googledrive": "^0.5.0",
     "telegraf-googlesheets": "^0.5.1",
     "telegraf-logfile": "^0.2.0",
