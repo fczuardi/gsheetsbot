@@ -58,7 +58,7 @@ const makeKeyboard = (ctx, next) => {
                 return extend({}, prev);
             }
             const button = buttonRow[0];
-            return extend({}, prev, { [button.text]: button.callback_data });
+            return extend({}, prev, { [button.text.trim()]: button.callback_data });
         }, {});
         ctx.session.textCommands = textCommands;
         ctx.session.lastMenu = inlineKeyboard;

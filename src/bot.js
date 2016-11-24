@@ -48,11 +48,16 @@ bot.on('message', (ctx, next) => {
         , awaitingInput
         , answerToEdit
     } = ctx.session;
-    if (textCommands && Object.keys(textCommands).includes(text)) {
+    // console.log({ text });
+    if (textCommands && Object.keys(textCommands).includes(text.trim())) {
+        // console.log('---TEXT COMMAND---');
         const callbackData = textCommands[text];
+        // console.log({ callbackData });
         const callbackPattern = new RegExp('([^ ]*) *(.*)');
         const matches = callbackData.match(callbackPattern);
+        // console.log({ matches });
         const actionName = matches[1];
+        // console.log({ actionName });
         ctx.match = matches;
         return Telegraf.compose(actions[actionName])(ctx, next);
     }
