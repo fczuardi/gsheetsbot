@@ -41,6 +41,7 @@ const chooseAnswer = (ctx, next) => {
         } ];
     console.log('ctx.updateType', ctx.updateType);
     ctx.session.questions = questions;
+    ctx.session.awaitingInput = null;
     if (ctx.updateType === 'callback_query') {
         return ctx.editMessageText(replyText,
             { parse_mode: 'Markdown'

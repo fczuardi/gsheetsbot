@@ -17,7 +17,7 @@ const answerCallback = (ctx, next) => (ctx.updateType === 'callback_query'
 );
 
 const nextSchoolQuestion = ctx => {
-    console.log('- - - schoolForm - - - -');
+    // console.log('- - - schoolForm - - - -');
     const questions = getQuestions(ctx);
     const answers = getAnswers(ctx);
     ctx.session.awaitingInput = 'schoolForm';
