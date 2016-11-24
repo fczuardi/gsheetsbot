@@ -12,30 +12,40 @@ const actions = require('./actions');
 const { createCron } = require('./cron');
 
 const bot = new Telegraf(config.telegram.token);
+
 // session in memory (ctx.session)
 bot.use(Telegraf.memorySession());
+
 // output debug logs to the screen
 bot.use(debugMiddleware);
+
 // log all telegram updates to a log file
 bot.use(logMiddleware(config.log));
+
 // add flags to check if the user has admin privileges to the state
 bot.use(adminMiddleware);
+
 // add a displayName property to the state
 // build from first/last/username when available
 bot.use(userMiddleware);
+
 // userStatus middleware that always checks if the messaging comes
 // from an approved / unapproved / new user
 bot.use(userStatusMiddleware);
+
 // check if the user has accepted the terms and if not, present it to her
 bot.use(termsOfService);
+
 // setup all /commandName commands see src/commands/index.js
 Object.keys(commands).forEach(name => {
     bot.command(name, ...commands[name]);
 });
+
 // setup all calback handlers
 Object.keys(actions).forEach(name => {
     bot.action(new RegExp(`(${name}) *(.*)`), Telegraf.compose(actions[name]));
 });
+
 // text input handler
 // used mostly to fill forms
 bot.on('message', (ctx, next) => {
@@ -48,6 +58,7 @@ bot.on('message', (ctx, next) => {
         , awaitingInput
         , answerToEdit
     } = ctx.session;
+
     // console.log({ text });
     if (textCommands && Object.keys(textCommands).includes(text.trim())) {
         // console.log('---TEXT COMMAND---');
@@ -61,6 +72,7 @@ bot.on('message', (ctx, next) => {
         ctx.match = matches;
         return Telegraf.compose(actions[actionName])(ctx, next);
     }
+
     if (awaitingInput) {
         const phoneNumber = contact ? contact.phone_number : null;
         const latLon = location ? JSON.stringify(location) : null;
@@ -82,8 +94,10 @@ bot.on('message', (ctx, next) => {
             return next();
         }
     }
+
     return Telegraf.compose(commands.start)(ctx, next);
 });
+
 // TODO get webhooks to work on heroku
 bot.telegram.removeWebHook().then(() => {
     bot.startPolling();
