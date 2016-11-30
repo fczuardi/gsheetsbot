@@ -52,6 +52,13 @@ const docs =
     { defaultDescription: 'Escolha uma opção:'
     };
 
+const broadcast =
+    { reviewMessage: 'Esta é a mensagem:'
+    , confirm: 'Deseja enviar a mensagem abaixo a *TODOS* os embaixadores aprovados?'
+    , submit: 'Sim. Enviar!'
+    , cancel: 'Não. Cancelar'
+    };
+
 const replies =
     { tos
     , status
@@ -60,6 +67,7 @@ const replies =
     , school
     , token
     , docs
+    , broadcast
     };
 
 module.exports = replies;

@@ -2,6 +2,7 @@ const Telegraf = require('telegraf');
 const config = require('./config');
 const debugMiddleware = require('./middlewares/debug');
 const logMiddleware = require('telegraf-logfile');
+const broadcastMiddleware = require('./middlewares/broadcast');
 const userStatusMiddleware = require('./middlewares/userStatus');
 const termsOfService = require('./middlewares/tos');
 const adminMiddleware = require('./middlewares/admin');
@@ -21,6 +22,10 @@ bot.use(debugMiddleware);
 
 // log all telegram updates to a log file
 bot.use(logMiddleware(config.log));
+
+// early exit if the update comes from the broadcastGroup but is not one of the
+// expected commands or callbacks
+bot.use(broadcastMiddleware);
 
 // add flags to check if the user has admin privileges to the state
 bot.use(adminMiddleware);

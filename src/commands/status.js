@@ -15,7 +15,7 @@ const flagUserAsNotified = ctx => {
     console.log('TBD update status sheet on the row of user', userId);
     const sheetName = tgs.getSheetName(config.sheets.user.status);
     const sheetData = ctx.state.sheets[sheetName] || [];
-    console.log({ sheetData });
+    // console.log({ sheetData });
     const { statusUserId
         , statusColumn
         , approvedValue
@@ -24,7 +24,6 @@ const flagUserAsNotified = ctx => {
         , notifiedValue
     } = config.sheets.user;
     const newRows = sheetData.map(row => {
-        console.log('__:: ', userId, row[statusUserId]);
         if (
             row[statusUserId] !== userId ||
             (row[statusColumn] !== approvedValue && row[statusColumn] !== deniedValue)
@@ -32,10 +31,10 @@ const flagUserAsNotified = ctx => {
             return row;
         }
         row[statusNotificationColumn] = notifiedValue;
-        console.log({ row });
+        // console.log({ row });
         return Array.apply(null, row).map(c => (c === undefined ? '' : c));
     });
-    console.log({ newRows });
+    // console.log({ newRows });
     return updateRows(newRows);
 };
 

@@ -24,7 +24,7 @@ const updateRows = newRows => {
         if (updateErr) {
             return console.error(updateErr);
         }
-        console.log({ updateRes });
+        // console.log({ updateRes });
         return updateRes;
     });
 };
