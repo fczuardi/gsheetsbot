@@ -57,6 +57,9 @@ const broadcast =
     , confirm: 'Deseja enviar a mensagem abaixo a *TODOS* os embaixadores aprovados?'
     , submit: 'Sim. Enviar!'
     , cancel: 'Não. Cancelar'
+    , success: 'Mensagem enviada com sucesso'
+    , cancelled: 'Mensagem cancelada'
+    , sessionError: 'Perdi sua mensagem. Envie o comando novamente por favor.'
     };
 
 const replies =
