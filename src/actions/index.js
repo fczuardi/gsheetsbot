@@ -10,6 +10,7 @@ const sendFile = require('./sendFile');
 const changeFolder = require('./changeFolder');
 const changeFolderUp = require('./changeFolderUp');
 const schoolForm = require('./schoolForm');
+const contact = require('../commands/contact');
 const status = require('../commands/status');
 
 const actions =
@@ -26,6 +27,7 @@ const actions =
     , changeSchoolAnswer
     , schoolForm
     , status
+    , contact
     };
 
 module.exports = actions;

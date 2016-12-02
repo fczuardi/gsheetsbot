@@ -8,6 +8,7 @@ const termsOfService = require('./middlewares/tos');
 const adminMiddleware = require('./middlewares/admin');
 const userMiddleware = require('./middlewares/user');
 const signupCommand = require('./commands/signup');
+const supportCommand = require('./commands/contact');
 const commands = require('./commands');
 const actions = require('./actions');
 const { createCron } = require('./cron');
@@ -95,6 +96,9 @@ bot.on('message', (ctx, next) => {
         case 'editSchoolAnswer':
             ctx.session.schoolAnswers[answerToEdit] = text;
             return Telegraf.compose(actions.reviewSchoolForm)(ctx, next);
+        case 'support':
+            return Telegraf.compose(supportCommand)(ctx, next);
+            return next();
         default:
             return next();
         }

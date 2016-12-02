@@ -47,7 +47,21 @@ const makeKeyboard = (ctx, next) => {
     }).filter(i => i !== null);
 
     console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
-    const inlineKeyboard = filesKeyboard.concat(ctx.state.defaultKeyboard || []);
+    
+    const customSubfolders = config.drive.subFolderExtraButtons;
+    const customization = customSubfolders.filter(folder => folder.id === rootId);
+    const extraButtons = !customization ? [] : customization.map(b => {
+        const button =
+            { text: b.text
+            , callback_data: b.callbackData
+            };
+        return [ button ];
+    });
+    
+    const inlineKeyboard = filesKeyboard.concat(
+        ctx.state.defaultKeyboard || []
+    ).concat(extraButtons);
+
     const keyboard = useCustomKeyboard
         ? { keyboard: inlineKeyboard.map(row => row.map(
             button => ({ text: button.text }))) }

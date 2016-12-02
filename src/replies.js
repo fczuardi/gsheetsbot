@@ -62,6 +62,12 @@ const broadcast =
     , sessionError: 'Perdi sua mensagem. Envie o comando novamente por favor.'
     };
 
+const support =
+    { adminHelp: 'Para responder uma mensagem clique duas vezes sobre ela.'
+    , success: 'Mensagem enviada com sucesso.'
+    , userHelp: 'Quer enviar uma mensagem para o suporte? Digite-a abaixo:'
+    , userSuccess: 'Mensagem enviada à equipe de suporte. Aguarde que entraremos em contato.'
+    };
 const replies =
     { tos
     , status
@@ -71,6 +77,7 @@ const replies =
     , token
     , docs
     , broadcast
+    , support
     };
 
 module.exports = replies;

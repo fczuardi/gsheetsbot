@@ -3,6 +3,7 @@ const status = require('./status');
 const token = require('./token');
 const school = require('../actions/schoolForm');
 const logs = require('./logs');
+const contact = require('./contact');
 
 const commands =
     { status
@@ -10,6 +11,7 @@ const commands =
     , token
     , indicar: school
     , logs
+    , contato: contact
     };
 
 module.exports = commands;

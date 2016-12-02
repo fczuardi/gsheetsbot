@@ -105,6 +105,11 @@ tempFolder = "./tmp"
 # subfolders with extra buttons
 [[drive.subFolderExtraButtons]]
 id = ""
+text = "Contato"
+callbackData = "contact"
+
+[[drive.subFolderExtraButtons]]
+id = ""
 text = "Indicar"
 callbackData = "schoolForm"
 
