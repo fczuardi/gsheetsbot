@@ -19,12 +19,10 @@ const updateCameFromBroadcastGroup = updateCameFromTheGroup(config.telegram.broa
 const updateCameFromSupportGroup = updateCameFromTheGroup(config.telegram.supportGroup);
 
 const groupMiddlewares = Telegraf.branch(updateCameFromGroup,
-    Telegraf.branch(updateCameFromBroadcastGroup,
-        broadcastMiddleware,
-        Telegraf.branch(updateCameFromSupportGroup,
-            supportMiddleware,
-            () => null
-        )
+    Telegraf.compose(
+        [ Telegraf.branch(updateCameFromBroadcastGroup, broadcastMiddleware, (ctx, next) => next())
+        , Telegraf.branch(updateCameFromSupportGroup, supportMiddleware, () => null)
+        ]
     ),
     (ctx, next) => next()
 );

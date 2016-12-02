@@ -9,7 +9,7 @@ const telegram = new Telegraf.Telegram(config.telegram.token);
 const supportedUpdate = ctx => {
     const update = ctx.update.callback_query || ctx.update;
     const { text } = update.message;
-    if (! text ) {
+    if (!text) {
         return false;
     }
     const isBroadcastCommand = text.toLowerCase().indexOf('/broadcast') !== -1;
@@ -24,6 +24,11 @@ const reviewMessage = (ctx, next) => {
     const pattern = new RegExp('(/broadcast)( *)(.*)');
     const matches = text.match(pattern);
     const msg = matches[3];
+    if (!msg) {
+        return ctx.replyWithMarkdown(
+            replies.broadcast.emptyMessage
+        ).catch(console.error);
+    }
     const options = { reply_markup: { inline_keyboard: [ [
         { text: 'sim', callback_data: `broadcast ${messageId}` },
         { text: 'nao', callback_data: `cancelBroadcast ${messageId}` }
@@ -31,8 +36,8 @@ const reviewMessage = (ctx, next) => {
     ctx.session.broadcastMessages = ctx.session.broadcastMessages || {};
     ctx.session.broadcastMessages[messageId] = msg;
     return ctx.replyWithMarkdown(replies.broadcast.confirm).then(
-        () => ctx.replyWithMarkdown(msg, options).then(next)
-    );
+        () => ctx.replyWithMarkdown(msg, options).then(next).catch(console.error)
+    ).catch(console.error);
 };
 
 const isBroadcastCommand = ctx =>
@@ -78,7 +83,7 @@ const handleCallback = Telegraf.compose(
 
 const handleUpdate = Telegraf.branch(isCallback, handleCallback, reviewMessage);
 
-const middleware = Telegraf.branch(supportedUpdate, handleUpdate, () => null);
+const middleware = Telegraf.branch(supportedUpdate, handleUpdate, (ctx, next) => next());
 
 module.exports = middleware;
 

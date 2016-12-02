@@ -60,6 +60,7 @@ const broadcast =
     , success: msg => `Mensagem enviada com sucesso: "${msg}"`
     , cancelled: 'Mensagem cancelada'
     , sessionError: 'Perdi sua mensagem. Envie o comando novamente por favor.'
+    , emptyMessage: 'Você esqueceu da mensagem, digite /broadcast *sua mensagem*'
     };
 
 const support =
