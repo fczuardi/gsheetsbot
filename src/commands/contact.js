@@ -24,7 +24,7 @@ const sendMessage = (ctx, next) => {
     return telegram.forwardMessage(
         chatId, fromChatId, messageId, extra
     ).then(message => {
-        global.tickets[message.message_id] = messageId;
+        global.tickets[`${message.message_id}`] = messageId;
         return ctx.replyWithMarkdown(
            replies.support.userSuccess
         ).then(next).catch(console.error);
