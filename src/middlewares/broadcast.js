@@ -2,16 +2,9 @@ const Telegraf = require('telegraf');
 const replies = require('../replies');
 const config = require('../config');
 const loadApprovedUsers = require('./approvedUsers');
+const { isCallback, callbackReply } = require('./helpers');
 
 const telegram = new Telegraf.Telegram(config.telegram.token);
-
-const updateCameFromGroup = ctx => `${ctx.update.message.chat.type}` === 'group';
-
-const updateCameFromBroadcastGroup = ctx => {
-    const update = ctx.update.callback_query || ctx.update;
-    const chatId = update.message.chat.id;
-    return `${chatId}` === config.telegram.broadcastGroup;
-};
 
 const supportedUpdate = ctx => {
     const update = ctx.update.callback_query || ctx.update;
@@ -22,8 +15,6 @@ const supportedUpdate = ctx => {
     const supportedCallback = data ? pattern.test(data) : null;
     return isBroadcastCommand || supportedCallback;
 };
-
-const isCallback = ctx => ctx.updateType === 'callback_query';
 
 const reviewMessage = (ctx, next) => {
     const { text, message_id: messageId } = ctx.message;
@@ -40,9 +31,6 @@ const reviewMessage = (ctx, next) => {
         () => ctx.replyWithMarkdown(msg, options).then(next)
     );
 };
-
-const callbackReply = (ctx, next) =>
-    ctx.answerCallbackQuery().then(next).catch(console.error);
 
 const isBroadcastCommand = ctx =>
     ctx.update.callback_query.data.split(' ')[0] === 'broadcast';
@@ -87,10 +75,7 @@ const handleCallback = Telegraf.compose(
 
 const handleUpdate = Telegraf.branch(isCallback, handleCallback, reviewMessage);
 
-const middleware = Telegraf.branch(updateCameFromBroadcastGroup,
-    Telegraf.branch(supportedUpdate, handleUpdate, () => null),
-    Telegraf.branch(updateCameFromGroup, () => null, (ctx, next) => next())
-);
+const middleware = Telegraf.branch(supportedUpdate, handleUpdate, () => null);
 
 module.exports = middleware;
 
