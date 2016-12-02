@@ -9,6 +9,9 @@ const telegram = new Telegraf.Telegram(config.telegram.token);
 const supportedUpdate = ctx => {
     const update = ctx.update.callback_query || ctx.update;
     const { text } = update.message;
+    if (! text ) {
+        return false;
+    }
     const isBroadcastCommand = text.toLowerCase().indexOf('/broadcast') !== -1;
     const { data } = update;
     const pattern = new RegExp('cancelBroadcast|broadcast');
