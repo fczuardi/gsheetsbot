@@ -65,7 +65,7 @@ const sendBroadcast = (ctx, next) => {
     ).then(() =>
         ctx.editMessageText(
             replies.broadcast.success(text), { parse_mode: 'Markdown' }
-        ).then(next).catch(console.error)
+        ).catch(console.error)
     );
 };
 
