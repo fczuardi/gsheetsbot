@@ -70,7 +70,7 @@ const sendBroadcast = (ctx, next) => {
 };
 
 const broadcastCancel = (ctx, next) =>
-    ctx.editMessageText(replies.broadcast.cancelled).then(next).catch(console.error);
+    ctx.editMessageText(replies.broadcast.cancelled).catch(console.error);
 
 
 const handleCallback = Telegraf.compose(
