@@ -17,9 +17,7 @@ const supportMiddleware = ctx => {
     const originalId = global && global.tickets
         ? global.tickets[`${replyToMessage.message_id}`]
         : null;
-    const extra = extend(
-        removeKeyboard, originalId ? { reply_to_message_id: originalId } : {}
-    );
+    const extra = originalId ? { reply_to_message_id: originalId } : {};
     // console.log('-- supportMiddleware --', id, reply, extra);
     return telegram.sendMessage(
         id, reply, extra
