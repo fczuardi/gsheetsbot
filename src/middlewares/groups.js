@@ -5,7 +5,8 @@ const supportMiddleware = require('./support');
 
 const updateCameFromGroup = ctx => {
     const update = ctx.update.callback_query || ctx.update;
-    return `${update.message.chat.type}` === 'group';
+    const chatType = `${update.message.chat.type}`;
+    return chatType === 'group' || chatType === 'supergroup';
 };
 
 const updateCameFromTheGroup = groupId => ctx => {
