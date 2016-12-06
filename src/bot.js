@@ -65,8 +65,12 @@ bot.on('message', (ctx, next) => {
         , answerToEdit
     } = ctx.session;
 
-    // console.log({ text });
-    if (textCommands && Object.keys(textCommands).includes(text.trim())) {
+    console.log({ text });
+    if (
+        textCommands && 
+        typeof text === 'string' && 
+        Object.keys(textCommands).includes(text.trim())
+    ) {
         // console.log('---TEXT COMMAND---');
         const callbackData = textCommands[text];
         // console.log({ callbackData });
