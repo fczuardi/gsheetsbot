@@ -22,7 +22,9 @@ const makeKeyboard = (ctx, next) => {
     }
     const currentFolderId = ctx.state.rootId || rootId;
     const useCustomKeyboard = config.drive.useCustomKeyboard;
+    // console.log({ useCustomKeyboard });
     const folders = ctx.state.folders[currentFolderId];
+    // console.log({ folders });
     const filesKeyboard = folders.map(file => {
         const isSubFolder = (file.mimeType === 'application/vnd.google-apps.folder');
         const isReadme = file.name.toLowerCase() === 'readme.md';
@@ -45,29 +47,35 @@ const makeKeyboard = (ctx, next) => {
             }
         ];
     }).filter(i => i !== null);
+    // console.log({ filesKeyboard });
 
-    console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
+    // console.log('ctx.state.defaultKeyboard', ctx.state.defaultKeyboard);
     
     const customSubfolders = config.drive.subFolderExtraButtons;
-    const customization = customSubfolders.filter(folder => folder.id === rootId);
-    const extraButtons = !customization ? [] : customization.map(b => {
+    // console.log({ currentFolderId });
+    const customization = customSubfolders.filter(folder => folder.id === currentFolderId);
+    // console.log({ customization });
+    // console.log('customization.length', customization.length);
+    const extraButtons = !customization || ctx.state.defaultKeyboard ? [] : customization.map(b => {
         const button =
             { text: b.text
             , callback_data: b.callbackData
             };
         return [ button ];
     });
+    // console.log({ extraButtons });
     
     const inlineKeyboard = filesKeyboard.concat(
         ctx.state.defaultKeyboard || []
     ).concat(extraButtons);
 
+    // console.log('inlineKeyboard', JSON.stringify(inlineKeyboard, ' ', 2));
     const keyboard = useCustomKeyboard
         ? { keyboard: inlineKeyboard.map(row => row.map(
             button => ({ text: button.text }))) }
         : { inline_keyboard: inlineKeyboard };
     if (useCustomKeyboard) {
-        console.log('customKeyboard', JSON.stringify(inlineKeyboard));
+        // console.log('customKeyboard', JSON.stringify(inlineKeyboard));
         const textCommands = inlineKeyboard.reduce((prev, buttonRow) => {
             if (!buttonRow.length) {
                 return extend({}, prev);
