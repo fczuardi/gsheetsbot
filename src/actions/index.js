@@ -8,7 +8,7 @@ const reviewUserForm = require('./reviewUserForm');
 const reviewSchoolForm = require('./reviewSchoolForm');
 const sendFile = require('./sendFile');
 const changeFolder = require('./changeFolder');
-const changeFolderUp = require('./changeFolderUp');
+const upFolder = require('./changeFolderUp');
 const schoolForm = require('./schoolForm');
 const contact = require('../commands/contact');
 const status = require('../commands/status');
@@ -20,7 +20,7 @@ const actions =
     , reviewSchoolForm
     , sendFile
     , changeFolder
-    , changeFolderUp
+    , upFolder
     , editUserAnswer
     , editSchoolAnswer
     , changeUserAnswer

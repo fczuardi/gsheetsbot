@@ -9,7 +9,7 @@ const changeFolder = (ctx, next) => {
     const parentFolder = ctx.session.parents[rootId];
     const customSubfolders = config.drive.subFolderExtraButtons;
     const customization = customSubfolders.filter(folder => folder.id === rootId);
-    console.log('--- - - changeFolder -- ', customSubfolders, customization);
+    // console.log('--- - - changeFolder -- ', customSubfolders, customization);
     ctx.state.rootId = rootId;
     ctx.session.currentFolder = rootId;
     const extraButtons = !customization ? [] : customization.map(b => {
@@ -21,7 +21,7 @@ const changeFolder = (ctx, next) => {
     });
     const backButton = !parentFolder ? [] : [ [
         { text: 'Voltar'
-        , callback_data: `changeFolderUp ${parentFolder}`
+        , callback_data: `upFolder ${parentFolder}`
         }
     ] ];
     const defaultKeyboard = extraButtons.concat(backButton);
