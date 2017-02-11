@@ -112,7 +112,7 @@ bot.on('message', (ctx, next) => {
 });
 
 // TODO get webhooks to work on heroku
-bot.telegram.removeWebHook().then(() => {
+bot.telegram.deleteWebhook().then(() => {
     bot.startPolling();
     console.log('Bot started in polling mode');
     // start cron job
