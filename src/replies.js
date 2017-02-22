@@ -45,6 +45,7 @@ const signup =
 const school =
     { submissionSent: [ 'Sua indicação foi enviada com sucesso.'
         , 'Utilize o botão "Escolas Indicadas" para acompanhar as suas indicações de escola dessa missão.' ]
+    , noSubmission: 'Você ainda não inscreveu nenhuma escola'
     , statusLine: s => `*${s.name}*: ${s.status === undefined ? 'indicada' : s.status}${s.notes ? `, ${s.notes}` : ''}`
     };
 

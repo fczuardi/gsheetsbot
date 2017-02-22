@@ -12,7 +12,6 @@ const { updateRows } = require('../cron');
 // cron sending this same message again
 const flagUserAsNotified = ctx => {
     const userId = `${ctx.from.id}`;
-    console.log('TBD update status sheet on the row of user', userId);
     const sheetName = tgs.getSheetName(config.sheets.user.status);
     const sheetData = ctx.state.sheets[sheetName] || [];
     // console.log({ sheetData });
@@ -23,19 +22,25 @@ const flagUserAsNotified = ctx => {
         , statusNotificationColumn
         , notifiedValue
     } = config.sheets.user;
+    let changed = false;
     const newRows = sheetData.map(row => {
         if (
             row[statusUserId] !== userId ||
-            (row[statusColumn] !== approvedValue && row[statusColumn] !== deniedValue)
+            (row[statusColumn] !== approvedValue && row[statusColumn] !== deniedValue) ||
+            row[statusNotificationColumn] === notifiedValue
         ) {
             return row;
         }
         row[statusNotificationColumn] = notifiedValue;
+        changed = true;
         // console.log({ row });
         return Array.apply(null, row).map(c => (c === undefined ? '' : c));
     });
     // console.log({ newRows });
-    return updateRows(newRows);
+    if (changed) {
+        return updateRows(newRows);
+    }
+    return 'notified';
 };
 
 const userStatus = (ctx, next) => {
@@ -51,8 +56,11 @@ const userStatus = (ctx, next) => {
 
 const schoolStatus = (ctx, next) => {
     if (!ctx.state.userHasAppliedSchools) {
-        flagUserAsNotified(ctx);
-        return ctx.replyWithMarkdown(replies.status.approved).then(next);
+        console.log('user havent applied any school');
+        if(flagUserAsNotified(ctx) !== 'notified') {
+            return ctx.replyWithMarkdown(replies.status.approved).then(next);
+        }
+        return ctx.replyWithMarkdown(replies.school.noSubmission).then(next);
     }
     const schoolListMarkdown = ctx.state.schoolStatusList.map(
         replies.school.statusLine
